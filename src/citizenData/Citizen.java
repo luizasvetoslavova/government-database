@@ -10,7 +10,7 @@ public class Citizen {
 
     private List<Punishment> punishments;
     private List<Possession> possessions;
-    private List<GoingAbroad> goingsAbroad;
+    private List<CrossingBorder> goingsAbroad;
     private List<Credit> credits;
 
     private Set<Citizen> relatives;
@@ -62,11 +62,11 @@ public class Citizen {
         this.possessions = possessions;
     }
 
-    public List<GoingAbroad> getGoingsAbroad() {
+    public List<CrossingBorder> getGoingsAbroad() {
         return goingsAbroad;
     }
 
-    public void setGoingsAbroad(List<GoingAbroad> goingsAbroad) {
+    public void setGoingsAbroad(List<CrossingBorder> goingsAbroad) {
         this.goingsAbroad = goingsAbroad;
     }
 

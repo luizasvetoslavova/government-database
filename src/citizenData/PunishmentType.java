@@ -1,0 +1,7 @@
+package citizenData;
+
+public enum PunishmentType {
+    MURDER, THEFT, HACKING, BLACKMAIL, FIRE_RAISING,
+    BRIBERY, TERRORISM, SPYING, SEXUAL_ASSAULT, FALSIFICATION,
+    DRUG_ABUSE
+}
