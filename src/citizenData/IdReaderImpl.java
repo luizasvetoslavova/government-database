@@ -17,7 +17,6 @@ public class IdReaderImpl implements IdReader {
 
     @Override
     public Region getBirthRegion(long id) {
-        //digit 7-9
         long region = id / 10;
         region = region / 1000;
 
