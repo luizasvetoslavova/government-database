@@ -2,55 +2,35 @@ package userCommunication;
 
 import citizenData.Country;
 import citizenData.PossessionType;
+import citizenData.Punishment;
 import citizenData.PunishmentType;
+import userCommunication.validation.Validator;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Communicator implements Communication {
 
-    Scanner scanner = new Scanner(System.in);
+    private Validator validator;
+    private Scanner scanner = new Scanner(System.in);
 
     @Override
     public String askForEmail() {
-        String email;
         System.out.print("E-mail: ");
-
-        try {
-            email = scanner.nextLine();
-        } catch (NullPointerException e) {
-            email = askForEmail();
-        }
-        return email;
+        return scanner.nextLine();
     }
 
     @Override
     public String askForPassword() {
-        String password;
         System.out.print("Password: ");
-
-        try {
-            password = scanner.nextLine();
-        } catch (NullPointerException e) {
-            password = askForEmail();
-        }
-        return password;
+        return scanner.nextLine();
     }
 
     @Override
     public Date askForDate() {
-        Date date;
         System.out.print("Date in format DD/MM/YYYY: ");
-        String input = scanner.nextLine();
-
-        try {
-            date = new SimpleDateFormat("dd/MM/yyyy").parse(input);
-        } catch (ParseException e) {
-            date = askForDate();
-        }
-        return date;
+        return validator.checkDate(scanner.nextLine());
     }
 
     @Override
@@ -97,52 +77,36 @@ public class Communicator implements Communication {
 
     @Override
     public double askForAmountOfMoney() {
-        double amount;
         System.out.println("Amount of money: ");
-        String input = scanner.nextLine();
-
-        try {
-            amount = Double.parseDouble(input);
-        } catch (NumberFormatException e) {
-            amount = askForAmountOfMoney();
-        }
-        return amount;
+        return validator.checkAmountOfMoney(scanner.nextLine());
     }
 
     @Override
     public double askForPercentage() {
-        double percent;
         System.out.println("Percent: ");
-        String input = scanner.nextLine();
+        return validator.checkPercentage(scanner.nextLine());
+    }
 
-        try {
-            percent = Double.parseDouble(input);
-        } catch (NumberFormatException e) {
-            percent = askForPercentage();
-        }
-        return percent / 100;
+    @Override
+    public long askForId() {
+        System.out.println("ID: ");
+        return validator.checkId(scanner.nextLine());
     }
 
     @Override
     public Country askForCountry() {
         System.out.println("Country short record (ex. BG):");
-//    AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW,
-//    AX, AZ, BA, BB, BD, BE, BF, BG, BH, BI, BJ, BM, BN, BO, BR, BS, BT, BV, BW, BY, BZ, CA, CC, CD, CF,
-//    CG, CH, CI, CK, CL, CM, CN, CO, CR, CS, CU, CV, CX, CY, CZ, DE, DJ, DK, DM, DO, DZ, EC, EE, EG, EH,
-//    ER, ES, ET, FI, FJ, FK, FM, FO, FR, GA, GB, GD, GE, GF, GH, GI, GL, GM, GN, GP, GQ, GR, GS, GT, GU,
-//    GW, GY, HK, HM, HN, HR, HT, HU, ID, IE, IL, IN, IO, IQ, IR, IS, IT, JM, JO, JP, KE, KG, KH, KI, KM,
-//    KN, KP, KR, KW, KY, KZ, LA, LB, LC, LI, LK, LR, LS, LT, LU, LV, LY, MA, MC, MD, MG, MH, MK, ML, MM,
-//    MN, MO, MP, MQ, MR, MS, MT, MU, MV, MW, MX, MY, MZ, NA, NC, NE, NF, NG, NI, NL, NO, NP, NR, NU, NZ,
-//    OM, PA, PE, PF, PG, PH, PK, PL, PM, PN, PR, PS, PT, PW, PY, QA, RE, RO, RU, RW, SA, SB, SC, SD, SE,
-//    SG, SH, SI, SJ, SK, SL, SM, SN, SO, SR, ST, SV, SY, SZ, TC, TD, TF, TG, TH, TJ, TK, TL, TM, TN, TO,
-//    TR, TT, TV, TW, TZ, UA, UG, UM, US, UY, UZ, VA, VC, VE, VG, VI, VN, VU, WF, WS, YE, YT, ZA, ZM, ZW
-        //TODO
-        return null;
+        return validator.checkCountry(scanner.nextLine().toUpperCase());
     }
 
     @Override
     public void show(String text) {
         System.out.println(text + "\n");
+    }
+
+    @Override
+    public void showIllegalInputMessage() {
+        System.out.print("Illegal input, please try again: ");
     }
 
     @Override

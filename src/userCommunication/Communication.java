@@ -20,9 +20,13 @@ public interface Communication {
 
     double askForPercentage();
 
+    long askForId();
+
     Country askForCountry();
 
     void show(String text);
+
+    void showIllegalInputMessage();
 
     void showAdminOptions();
 
