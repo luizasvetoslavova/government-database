@@ -1,38 +1,22 @@
+import database.operations.FileExtractor;
+
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.nio.file.Path;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
+
+        FileExtractor fileExtractor = new FileExtractor();
         Path admins = Path.of("src", "database", "accounts",
-                "Admins.tsv");
+                "Admins.csv");
+        String data = fileExtractor.extractWholeData(admins);
 
-        Reader reader = new FileReader(admins.toFile());
+        List<String> emailsAndPasswords = List.of(data.split("\r\n"));
 
-        int character = 0;
-        StringBuilder fileText = new StringBuilder();
-
-//        do {
-//            try {
-//                character = reader.read();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            fileText.append((char) character);
-//        } while (character != -1);
-
-        do {
-            try {
-                character = reader.read();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            fileText.append((char) character);
-        } while (character != -1);
-
-        System.out.println(fileText);
+        for(int i = 1; i < emailsAndPasswords.size(); i++) {
+            System.out.println(emailsAndPasswords.get(i).split(",")[1]);
+        }
     }
 }

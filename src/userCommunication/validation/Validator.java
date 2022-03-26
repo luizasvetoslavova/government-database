@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Validator implements Validation {
-
     private Communicator communicator;
 
     @Override

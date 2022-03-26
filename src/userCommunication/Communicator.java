@@ -2,12 +2,10 @@ package userCommunication;
 
 import citizenData.Country;
 import citizenData.PossessionType;
-import citizenData.Punishment;
 import citizenData.PunishmentType;
 import userCommunication.validation.Validator;
 
 import java.util.Date;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Communicator implements Communication {
