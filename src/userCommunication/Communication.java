@@ -6,23 +6,25 @@ import java.util.Date;
 
 public interface Communication {
 
-    String askForEmail();
+    String getEmail();
 
-    String askForPassword();
+    String getPassword();
 
-    Date askForDate();
+    Date getDate();
 
-    PunishmentType askForPunishmentType();
+    PunishmentType getPunishmentType();
 
-    PossessionType askForPossessionType();
+    PossessionType getPossessionType();
 
-    double askForAmountOfMoney();
+    double getAmountOfMoney();
 
-    double askForPercentage();
+    double getPercentage();
 
-    long askForId();
+    long getId();
 
-    Country askForCountry();
+    Country getCountry();
+
+    void welcome();
 
     void show(String text);
 
@@ -33,6 +35,4 @@ public interface Communication {
     void showUserOptions();
 
     void showOrganisationOptions();
-
-    void welcome();
 }

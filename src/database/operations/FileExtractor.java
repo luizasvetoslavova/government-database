@@ -17,16 +17,6 @@ public class FileExtractor implements FileExtraction {
         return extractWholeData(reader);
     }
 
-    @Override
-    public List<String> getEmails(Path path) {
-        return null;
-    }
-
-    @Override
-    public List<String> getPasswords(Path path) {
-        return null;
-    }
-
     private String extractWholeData(Reader reader) {
         int character = 0;
         StringBuilder data = new StringBuilder();

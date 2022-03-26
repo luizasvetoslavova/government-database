@@ -8,14 +8,17 @@ import java.util.*;
 
 public class Authenticator implements Authentication {
 
-    private FileExtractor fileExtractor;
-    private Communicator communicator;
+    private final FileExtractor fileExtractor;
+    private final Communicator communicator;
 
     private final Path admins;
     private final Path organisations;
     private final Path users;
 
     public Authenticator() {
+        fileExtractor = new FileExtractor();
+        communicator = new Communicator();
+
         admins = Path.of("src", "database", "accounts",
                 "Admins.csv");
         organisations = Path.of("src", "database", "accounts",
@@ -28,7 +31,7 @@ public class Authenticator implements Authentication {
     public String checkEmail(String email) {
         while (!isEmailLegal(email)) {
             communicator.showIllegalInputMessage();
-            email = communicator.askForEmail();
+            email = communicator.getEmail();
         }
         return email;
     }
@@ -37,16 +40,16 @@ public class Authenticator implements Authentication {
     public String checkPassword(String email, String password) {
         while (!isPasswordCorrect(email, password)) {
             communicator.showIllegalInputMessage();
-            password = communicator.askForPassword();
+            password = communicator.getPassword();
         }
         return password;
     }
 
-    public boolean isEmailLegal(String email) {
+    private boolean isEmailLegal(String email) {
         return isEmailLegal(admins, email) || isEmailLegal(organisations, email) || isEmailLegal(users, email);
     }
 
-    private boolean isEmailLegal(Path path, String email) {
+    public boolean isEmailLegal(Path path, String email) {
         List<String> emailsAndPasswords = List.of(fileExtractor.extractWholeData(path).split("\r\n"));
         Set<String> emails = new HashSet<>();
 
@@ -56,7 +59,7 @@ public class Authenticator implements Authentication {
         return emails.contains(email);
     }
 
-    public boolean isPasswordCorrect(String email, String password) {
+    private boolean isPasswordCorrect(String email, String password) {
         List<String> emailsAndPasswords = List.of(fileExtractor.extractWholeData(admins).split("\r\n"));
 
         for (int i = 1; i < emailsAndPasswords.size(); i++) {
@@ -66,5 +69,17 @@ public class Authenticator implements Authentication {
             }
         }
         return false;
+    }
+
+    public Path getAdmins() {
+        return admins;
+    }
+
+    public Path getOrganisations() {
+        return organisations;
+    }
+
+    public Path getUsers() {
+        return users;
     }
 }

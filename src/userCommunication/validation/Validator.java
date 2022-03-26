@@ -8,7 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Validator implements Validation {
-    private Communicator communicator;
+
+    private final Communicator communicator;
+
+    public Validator() {
+        communicator = new Communicator();
+    }
 
     @Override
     public long checkId(String input) {
@@ -17,7 +22,7 @@ public class Validator implements Validation {
             id = Long.parseLong(input);
         } catch (NumberFormatException e) {
             communicator.showIllegalInputMessage();
-            id = communicator.askForId();
+            id = communicator.getId();
         }
         return id;
     }
@@ -29,7 +34,7 @@ public class Validator implements Validation {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(input);
         } catch (ParseException e) {
             communicator.showIllegalInputMessage();
-            date = communicator.askForDate();
+            date = communicator.getDate();
         }
         return date;
     }
@@ -41,7 +46,7 @@ public class Validator implements Validation {
             amount = Double.parseDouble(input);
         } catch (NumberFormatException e) {
             communicator.showIllegalInputMessage();
-            amount = communicator.askForAmountOfMoney();
+            amount = communicator.getAmountOfMoney();
         }
         return amount;
     }
@@ -53,7 +58,7 @@ public class Validator implements Validation {
             percent = Double.parseDouble(input);
         } catch (NumberFormatException e) {
             communicator.showIllegalInputMessage();
-            percent = communicator.askForPercentage();
+            percent = communicator.getPercentage();
         }
         return percent / 100;
     }
@@ -65,7 +70,7 @@ public class Validator implements Validation {
             country = Country.valueOf(input);
         } catch (IllegalArgumentException e) {
             communicator.showIllegalInputMessage();
-            country = communicator.askForCountry();
+            country = communicator.getCountry();
         }
         return country;
     }

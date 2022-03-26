@@ -10,29 +10,34 @@ import java.util.Scanner;
 
 public class Communicator implements Communication {
 
-    private Validator validator;
-    private Scanner scanner = new Scanner(System.in);
+    private final Validator validator;
+    private final Scanner scanner;
+
+    public Communicator() {
+        validator = new Validator();
+        scanner = new Scanner(System.in);
+    }
 
     @Override
-    public String askForEmail() {
+    public String getEmail() {
         System.out.print("E-mail: ");
         return scanner.nextLine();
     }
 
     @Override
-    public String askForPassword() {
+    public String getPassword() {
         System.out.print("Password: ");
         return scanner.nextLine();
     }
 
     @Override
-    public Date askForDate() {
+    public Date getDate() {
         System.out.print("Date in format DD/MM/YYYY: ");
         return validator.checkDate(scanner.nextLine());
     }
 
     @Override
-    public PunishmentType askForPunishmentType() {
+    public PunishmentType getPunishmentType() {
         System.out.print("Punishment type: \n" +
                 "1. Fining \n" +
                 "2. Imprisonment \n" +
@@ -51,12 +56,12 @@ public class Communicator implements Communication {
             case "5" -> PunishmentType.BAN_ON_CROSSING_BORDER;
             case "6" -> PunishmentType.HOUSE_ARREST;
             case "7" -> PunishmentType.SERVICE_WORK;
-            default -> askForPunishmentType();
+            default -> getPunishmentType();
         };
     }
 
     @Override
-    public PossessionType askForPossessionType() {
+    public PossessionType getPossessionType() {
         System.out.print("Possession types: \n" +
                 "1. Vehicle \n" +
                 "2. Land \n" +
@@ -69,30 +74,30 @@ public class Communicator implements Communication {
             case "2" -> PossessionType.LAND;
             case "3" -> PossessionType.BUILDING;
             case "4" -> PossessionType.FIREARM;
-            default -> askForPossessionType();
+            default -> getPossessionType();
         };
     }
 
     @Override
-    public double askForAmountOfMoney() {
+    public double getAmountOfMoney() {
         System.out.println("Amount of money: ");
         return validator.checkAmountOfMoney(scanner.nextLine());
     }
 
     @Override
-    public double askForPercentage() {
+    public double getPercentage() {
         System.out.println("Percent: ");
         return validator.checkPercentage(scanner.nextLine());
     }
 
     @Override
-    public long askForId() {
+    public long getId() {
         System.out.println("ID: ");
         return validator.checkId(scanner.nextLine());
     }
 
     @Override
-    public Country askForCountry() {
+    public Country getCountry() {
         System.out.println("Country short record (ex. BG):");
         return validator.checkCountry(scanner.nextLine().toUpperCase());
     }
@@ -134,5 +139,9 @@ public class Communicator implements Communication {
     @Override
     public void welcome() {
         System.out.println("Welcome to the government database!");
+    }
+
+    public Scanner getScanner() {
+        return scanner;
     }
 }
