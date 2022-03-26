@@ -130,4 +130,9 @@ public class Communicator implements Communication {
     public void showOrganisationOptions() {
         System.out.println("You logged as an organisation. You can only view all users of yours:");
     }
+
+    @Override
+    public void welcome() {
+        System.out.println("Welcome to the government database!");
+    }
 }

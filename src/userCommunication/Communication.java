@@ -33,4 +33,6 @@ public interface Communication {
     void showUserOptions();
 
     void showOrganisationOptions();
+
+    void welcome();
 }

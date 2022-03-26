@@ -6,11 +6,6 @@ import java.util.List;
 
 public class FileExtractor implements FileExtraction {
 
-    Path admins = Path.of("src", "database", "accounts",
-            "Admins.csv");
-    Path organisations = Path.of("src", "database", "accounts", "Organisations.csv");
-    Path users = Path.of("src", "database", "accounts", "Users.csv");
-
     @Override
     public String extractWholeData(Path path) {
         Reader reader = null;
@@ -47,34 +42,4 @@ public class FileExtractor implements FileExtraction {
 
         return data.toString();
     }
-
-
-//    List<String> emailsAndPasswords = Arrays.stream(fileText.toString().split("\t")).toList();
-//
-//    Set<String> emails = new HashSet<>();
-//
-//        for(int i = 2; i<emailsAndPasswords.size();i++){
-//        if (i % 2 != 0) {
-//            emails.add(emailsAndPasswords.get(i));
-//        }
-//    }
-//        System.out.println(emails);
-//
-//    public List<String> getAdminEmails() {
-//        Set<String> emails = new HashSet<>();
-//
-//        for (int i = 2; i < emailsAndPasswords.size(); i++) {
-//            if (i % 2 != 0) {
-//                emails.add(emailsAndPasswords.get(i));
-//            }
-//        }
-//    }
-//
-//    public List<String> getOrganisationEmails(Path organisation) {
-//
-//    }
-//
-//    public List<String> getUserEmails(Path user) {
-//
-//    }
 }

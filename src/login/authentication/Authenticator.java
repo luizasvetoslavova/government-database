@@ -1,16 +1,19 @@
 package login.authentication;
 
 import database.operations.FileExtractor;
+import userCommunication.Communicator;
 
 import java.nio.file.Path;
 import java.util.*;
 
 public class Authenticator implements Authentication {
+
+    private FileExtractor fileExtractor;
+    private Communicator communicator;
+
     private final Path admins;
     private final Path organisations;
     private final Path users;
-
-    private FileExtractor fileExtractor;
 
     public Authenticator() {
         admins = Path.of("src", "database", "accounts",
@@ -22,6 +25,23 @@ public class Authenticator implements Authentication {
     }
 
     @Override
+    public String checkEmail(String email) {
+        while (!isEmailLegal(email)) {
+            communicator.showIllegalInputMessage();
+            email = communicator.askForEmail();
+        }
+        return email;
+    }
+
+    @Override
+    public String checkPassword(String email, String password) {
+        while (!isPasswordCorrect(email, password)) {
+            communicator.showIllegalInputMessage();
+            password = communicator.askForPassword();
+        }
+        return password;
+    }
+
     public boolean isEmailLegal(String email) {
         return isEmailLegal(admins, email) || isEmailLegal(organisations, email) || isEmailLegal(users, email);
     }
@@ -36,7 +56,6 @@ public class Authenticator implements Authentication {
         return emails.contains(email);
     }
 
-    @Override
     public boolean isPasswordCorrect(String email, String password) {
         List<String> emailsAndPasswords = List.of(fileExtractor.extractWholeData(admins).split("\r\n"));
 

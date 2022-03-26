@@ -1,6 +1,6 @@
 package login.authentication;
 
 public interface Authentication {
-    boolean isEmailLegal(String email);
-    boolean isPasswordCorrect(String email, String password);
+    String checkEmail(String email);
+    String checkPassword(String email, String password);
 }
