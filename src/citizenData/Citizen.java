@@ -7,6 +7,7 @@ public class Citizen {
     private String name;
     private String id;
     private String address;
+    private Gender gender;
 
     private List<Punishment> punishments;
     private List<Possession> possessions;
