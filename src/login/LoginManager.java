@@ -42,11 +42,11 @@ public class LoginManager {
     private void initAdminOperations() {
         communicator.showAdminOptions();
         switch (communicator.getScanner().nextLine()) {
-            case "1" ->
-            case "2" ->
-            case "3" ->
-            case "4" ->
-            case "5" ->
+//            case "1" ->
+//            case "2" ->
+//            case "3" ->
+//            case "4" ->
+//            case "5" ->
             default -> communicator.showIllegalInputMessage();
         }
     }
@@ -58,8 +58,8 @@ public class LoginManager {
     private void initUserOperations() {
         communicator.showUserOptions();
         switch (communicator.getScanner().nextLine()) {
-            case "1" ->
-            case "2" ->
+//            case "1" ->
+//            case "2" ->
             default -> communicator.showIllegalInputMessage();
         }
     }

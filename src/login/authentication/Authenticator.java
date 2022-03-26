@@ -7,17 +7,6 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class Authenticator implements Authentication {
-<<<<<<< HEAD
-    @Override
-    public boolean emailExists() {
-        return false;
-    }
-
-    @Override
-    public boolean isPasswordCorrect() {
-        return false;
-    }
-=======
 
     private final FileExtractor fileExtractor;
     private final Communicator communicator;
@@ -93,5 +82,4 @@ public class Authenticator implements Authentication {
     public Path getUsers() {
         return users;
     }
->>>>>>> login
 }

@@ -6,26 +6,6 @@ import java.util.Date;
 
 public interface Communication {
 
-<<<<<<< HEAD
-    String askForEmail();
-
-    String askForPassword();
-
-    Date askForDate();
-
-    PunishmentType askForPunishmentType();
-
-    PossessionType askForPossessionType();
-
-    double askForAmountOfMoney();
-
-    double askForPercentage();
-
-    Country askForCountry();
-
-    void show(String text);
-
-=======
     String getEmail();
 
     String getPassword();
@@ -50,7 +30,6 @@ public interface Communication {
 
     void showIllegalInputMessage();
 
->>>>>>> login
     void showAdminOptions();
 
     void showUserOptions();
