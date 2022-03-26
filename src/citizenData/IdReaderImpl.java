@@ -5,9 +5,6 @@ import java.util.Date;
 public class IdReaderImpl implements IdReader {
     @Override
     public Date getBirthDate(long id) {
-        //(id / 10000) - 40     -from 1999
-        //(id / 10000) - 20     -before 1900
-        //(id / 10000) - 40     -from 1900 to 1999
         return null;
     }
 
