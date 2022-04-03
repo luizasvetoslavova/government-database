@@ -1,8 +1,8 @@
 package userCommunication;
 
-import citizenData.Country;
-import citizenData.PossessionType;
-import citizenData.PunishmentType;
+import citizenData.lists.Country;
+import citizenData.lists.PossessionType;
+import citizenData.lists.PunishmentType;
 import userCommunication.validation.Validator;
 
 import java.util.Date;

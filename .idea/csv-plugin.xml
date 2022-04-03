@@ -3,35 +3,35 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="/src/database/accounts/Admins.csv">
+        <entry key="\src\database\accounts\Admins.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/src/database/accounts/Organisations.csv">
+        <entry key="\src\database\accounts\Citizens.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/src/database/accounts/Users.csv">
+        <entry key="\src\database\accounts\Organisations.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/src/database/goverment/Citizens.tsv">
+        <entry key="\src\database\accounts\Users.csv">
           <value>
             <Attribute>
-              <option name="separator" value="&#9;" />
+              <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/src/database/government/Citizen.csv">
+        <entry key="\src\database\government\Citizens.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -1,6 +1,6 @@
 package userCommunication.validation;
 
-import citizenData.Country;
+import citizenData.lists.Country;
 
 import java.util.Date;
 

@@ -1,6 +1,10 @@
 package citizenData;
 
-public enum Crime {
-    MURDER, THEFT, HACKING, BLACKMAIL, FIRE_RAISING, BRIBERY, TERRORISM, SPYING, SEXUAL_ASSAULT, FALSIFICATION,
-    DRUG_ABUSE
+import citizenData.lists.PunishmentType;
+
+import java.util.Date;
+
+public class Crime {
+    private Date dateOfSentence;
+    private PunishmentType punishmentType;
 }
