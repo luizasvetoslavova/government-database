@@ -1,2 +1,0 @@
-Citizen{name='Goshka'| id='1234567890'| address='Kokiche 14'| gender=FEMALE| crimes=[Crime{, crimeType=BLACKMAIL, punishment=Punishment{releaseDate=Sun Apr 03 17:11:11 EEST 2022, punishmentType=IMPRISONMENT}}]| possessions=null| crossingBorders=null| credits=[Credit{bank=Bank{address='Mezdra', name='OBB'}, amountOfMoney=12.12}, Credit{bank=Bank{address='Vratsa', name='DSK'}, amountOfMoney=3.5}]| relativesIds=[12345, 4539845]| companies=null}
-

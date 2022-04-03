@@ -10,21 +10,14 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\src\database\accounts\Admins.tsv">
-          <value>
-            <Attribute>
-              <option name="separator" value="&#9;" />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\src\database\accounts\Organisations.csv">
+        <entry key="\src\database\accounts\Citizens.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\src\database\accounts\Organisations.tsv">
+        <entry key="\src\database\accounts\Organisations.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -38,24 +31,10 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\src\database\accounts\Users.tsv">
-          <value>
-            <Attribute>
-              <option name="separator" value="&#9;" />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\src\database\government\Citizens.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\src\database\government\Citizens.tsv">
-          <value>
-            <Attribute>
-              <option name="separator" value="&#9;" />
             </Attribute>
           </value>
         </entry>

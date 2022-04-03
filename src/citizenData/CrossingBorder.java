@@ -1,5 +1,7 @@
 package citizenData;
 
+import citizenData.lists.Country;
+
 import java.util.Date;
 
 public class CrossingBorder {
@@ -13,27 +15,12 @@ public class CrossingBorder {
         this.isOutOfCountry = isOutOfCountry;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public boolean isOutOfCountry() {
-        return isOutOfCountry;
-    }
-
-    public void setOutOfCountry(boolean outOfCountry) {
-        isOutOfCountry = outOfCountry;
+    @Override
+    public String toString() {
+        return "CrossingBorder{" +
+                "date=" + date +
+                ", country=" + country +
+                ", isOutOfCountry=" + isOutOfCountry +
+                '}';
     }
 }

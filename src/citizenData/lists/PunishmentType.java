@@ -1,4 +1,4 @@
-package citizenData;
+package citizenData.lists;
 
 public enum PunishmentType {
     FINING, IMPRISONMENT, BOARDING_SCHOOL, SUSPENDED_SENTENCE, BAN_ON_CROSSING_BORDER, HOUSE_ARREST,
