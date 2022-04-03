@@ -1,5 +1,8 @@
 package citizenData;
 
+import citizenData.lists.Gender;
+import citizenData.lists.Region;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

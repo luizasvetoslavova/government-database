@@ -1,4 +1,4 @@
-package citizenData;
+package citizenData.lists;
 
 public enum Country {
     AD, AE, AF, AG, AI, AL, AM, AN, AO, AQ, AR, AS, AT, AU, AW,
