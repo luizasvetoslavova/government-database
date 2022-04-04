@@ -1,4 +1,4 @@
-package citizenData;
+package citizenData.lists;
 
 public enum Region {
     BLAGOEVGRAD, BURGAS, VARNA, VELIKO_TARNOVO, VIDIN, VRATSA, GABROVO, KARDZHALI, KYUSTENSIL,

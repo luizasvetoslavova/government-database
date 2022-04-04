@@ -1,8 +1,8 @@
 package userCommunication;
 
-import citizenData.Country;
-import citizenData.PossessionType;
-import citizenData.PunishmentType;
+import citizenData.lists.Country;
+import citizenData.lists.PossessionType;
+import citizenData.lists.PunishmentType;
 import userCommunication.validation.Validator;
 
 import java.util.Date;
@@ -102,11 +102,6 @@ public class Communicator implements Communication {
     }
 
     @Override
-    public void show(String text) {
-        System.out.println(text + "\n");
-    }
-
-    @Override
     public void showIllegalInputMessage() {
         System.out.print("Illegal input, please try again: ");
     }
@@ -116,28 +111,54 @@ public class Communicator implements Communication {
         System.out.print("You logged as an admin. You have control over all organisations. \n" +
                 "1. Add data \n" +
                 "2. Edit data \n" +
-                "3. View data for citizen \n" +
-                "4. Create organisation \n" +
-                "5. Add user \n" +
+                "3. View data for citizen " +
+                "4. Logout \n" +
+                "Your choice: ");
+    }
+
+    @Override
+    public void showAdminDataAddingOptions() {
+        System.out.println("Add new: \n" +
+                "1. Citizen \n" +
+                "2. Organisation \n" +
+                "3. First organisation user \n" +
+                "Your choice: ");
+    }
+
+    @Override
+    public void showAdminDataEditingOptions() {
+        System.out.println("Edit: \n" +
+                "1. Citizen \n" +
+                "2. Organisation \n" +
+                "Your choice: ");
+    }
+
+    @Override
+    public void showOrganisationOptions() {
+        System.out.println("You logged as an organisation. \n" +
+                "1. Add user \n" +
+                "2. View all users of yours " +
+                "3. Logout \n" +
                 "Your choice: ");
     }
 
     @Override
     public void showUserOptions() {
         System.out.print("You logged as a user. \n" +
-                "1. View data \n" +
-                "2. Edit data \n" +
+                "1. View data for citizen \n" +
+                "2. Edit data for citizen \n" +
+                "3. Logout \n" +
                 "Your choice: ");
     }
 
     @Override
-    public void showOrganisationOptions() {
-        System.out.println("You logged as an organisation. You can only view all users of yours:");
+    public void welcome() {
+        System.out.println("Welcome to the government interactive database!");
     }
 
     @Override
-    public void welcome() {
-        System.out.println("Welcome to the government database!");
+    public void show(String text) {
+        System.out.println(text);
     }
 
     public Scanner getScanner() {

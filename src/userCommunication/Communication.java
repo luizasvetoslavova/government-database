@@ -1,6 +1,8 @@
 package userCommunication;
 
-import citizenData.*;
+import citizenData.lists.Country;
+import citizenData.lists.PossessionType;
+import citizenData.lists.PunishmentType;
 
 import java.util.Date;
 
@@ -35,4 +37,8 @@ public interface Communication {
     void showUserOptions();
 
     void showOrganisationOptions();
+
+    void showAdminDataAddingOptions();
+
+    void showAdminDataEditingOptions();
 }

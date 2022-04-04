@@ -3,7 +3,6 @@ package acc;
 import java.util.List;
 
 public class Organisation extends Account {
-
     List <User> users;
 
     public Organisation(String username, String password) {

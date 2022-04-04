@@ -1,5 +1,8 @@
 package citizenData;
 
+import citizenData.lists.Gender;
+import citizenData.lists.Region;
+
 import java.util.Date;
 
 public interface IdReader {
