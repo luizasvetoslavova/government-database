@@ -10,13 +10,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\src\database\accounts\Citizens.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\src\database\accounts\Organisations.csv">
           <value>
             <Attribute>
@@ -31,35 +24,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\src\database\government\Citizens.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\src\database\accounts\Admins.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\src\database\accounts\Organisations.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\src\database\accounts\Users.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\src\database\government\Citizens.csv">
+        <entry key="\src\database\organisations\Bank.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -14,7 +14,7 @@ public class Credit {
     @Override
     public String toString() {
         return "Credit{" +
-                "bank=" + bank +
+                "bank=" + bank.bankInfoToString() +
                 ", total=" + total +
                 '}';
     }

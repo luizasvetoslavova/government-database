@@ -10,11 +10,11 @@ import userCommunication.Communicator;
 
 public class LoginManager {
 
-    public static LoginManager instance;
+    private static LoginManager instance;
 
     private final Authenticator authenticator;
     private final Communicator communicator;
-    private final InputOutputManager inputOutputManager;
+    private final InputOutput inputOutputManager;
     private final AccountsDatabase accountsDatabase;
 
     private Account logged;
@@ -30,7 +30,7 @@ public class LoginManager {
     private LoginManager() {
         authenticator = new Authenticator();
         communicator = new Communicator();
-        inputOutputManager = new InputOutputManager();
+        inputOutputManager = InputOutput.getInstance();
         accountsDatabase = AccountsDatabase.getInstance();
     }
 
@@ -51,7 +51,7 @@ public class LoginManager {
                     inputOutputManager.initAdminOperations();
 
                 } else if (logged instanceof Organisation) {
-                    inputOutputManager.initOrganisationOperations();
+                    inputOutputManager.initOrganisationOperations((Organisation) logged);
 
                 } else if (logged instanceof User) {
                     inputOutputManager.initUserOperations((User) logged);

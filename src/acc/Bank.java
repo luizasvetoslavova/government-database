@@ -1,5 +1,7 @@
 package acc;
 
+import database.organisations.BankDatabase;
+
 public class Bank extends User {
     private String address;
     private String name;
@@ -12,7 +14,7 @@ public class Bank extends User {
         this.name = name;
     }
 
-    //when saving into citizen data, use that method
+    //when saving into citizen data file, use that method
     public String bankInfoToString() {
         return "Bank{" +
                 "address='" + address + '\'' +
@@ -20,7 +22,7 @@ public class Bank extends User {
                 '}';
     }
 
-    //when saving into 'Users' file, use that method
+    //when saving into accounts file, use that method
     public String accountInfoToString() {
         return "Bank{" +
                 "email='" + email + '\'' +

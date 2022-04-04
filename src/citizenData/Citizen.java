@@ -28,6 +28,18 @@ public class Citizen {
         CitizensDatabase.getInstance().add(this);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public List<Possession> getPossessions() {
+        return possessions;
+    }
+
+    public List<Credit> getCredits() {
+        return credits;
+    }
+
     @Override
     public String toString() {
         return "Citizen{" +

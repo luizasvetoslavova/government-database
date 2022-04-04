@@ -12,4 +12,8 @@ public class Organisation extends Account {
     public void addUser(User user){
         users.add(user);
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
 }

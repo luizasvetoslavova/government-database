@@ -31,6 +31,18 @@ public class Communicator implements Communication {
     }
 
     @Override
+    public String getName() {
+        System.out.print("Name: ");
+        return scanner.nextLine();
+    }
+
+    @Override
+    public String getAddress() {
+        System.out.print("Address: ");
+        return scanner.nextLine();
+    }
+
+    @Override
     public Date getDate() {
         System.out.print("Date in format DD/MM/YYYY: ");
         return validator.checkDate(scanner.nextLine());
@@ -90,9 +102,9 @@ public class Communicator implements Communication {
     }
 
     @Override
-    public long getId() {
+    public String getId() {
         System.out.println("ID: ");
-        return validator.checkId(scanner.nextLine());
+        return String.valueOf(validator.checkId(scanner.nextLine()));
     }
 
     @Override
@@ -107,18 +119,22 @@ public class Communicator implements Communication {
     }
 
     @Override
+    public void showAlreadyExistingUserMessage() {
+        System.out.println("First user of that organisation already exists.");
+    }
+
+    @Override
     public void showAdminOptions() {
         System.out.print("You logged as an admin. You have control over all organisations. \n" +
                 "1. Add data \n" +
-                "2. Edit data \n" +
-                "3. View data for citizen " +
-                "4. Logout \n" +
+                "2. View data for citizen " +
+                "3. Logout \n" +
                 "Your choice: ");
     }
 
     @Override
     public void showAdminDataAddingOptions() {
-        System.out.println("Add new: \n" +
+        System.out.print("Add new: \n" +
                 "1. Citizen \n" +
                 "2. Organisation \n" +
                 "3. First organisation user \n" +
@@ -126,19 +142,18 @@ public class Communicator implements Communication {
     }
 
     @Override
-    public void showAdminDataEditingOptions() {
-        System.out.println("Edit: \n" +
-                "1. Citizen \n" +
-                "2. Organisation \n" +
+    public void showOrganisationOptions() {
+        System.out.print("You logged as an organisation. \n" +
+                "1. Add user \n" +
+                "2. View all users of yours " +
+                "3. Logout \n" +
                 "Your choice: ");
     }
 
     @Override
-    public void showOrganisationOptions() {
-        System.out.println("You logged as an organisation. \n" +
-                "1. Add user \n" +
-                "2. View all users of yours " +
-                "3. Logout \n" +
+    public void showUserTypes() {
+        System.out.print("1. Bank \n" +
+                "2. Police \n" +
                 "Your choice: ");
     }
 
@@ -152,8 +167,27 @@ public class Communicator implements Communication {
     }
 
     @Override
+    public void showBankEditingOptions() {
+        System.out.print("1. Add credit \n" +
+                "2. Take possession \n" +
+                "3. Change balance \n");
+    }
+
+    @Override
+    public void showPoliceEditingOptions() {
+        System.out.print("1. Add crime \n" +
+                "2. Take possession \n" +
+                "3. Add crossing border \n");
+    }
+
+    @Override
     public void welcome() {
-        System.out.println("Welcome to the government interactive database!");
+        System.out.println("Welcome to the government interactive database! \n");
+    }
+
+    @Override
+    public void showSuccessfulOperationMessage() {
+        System.out.println("Operation successful! \n");
     }
 
     @Override
