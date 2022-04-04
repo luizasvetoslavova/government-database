@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Path;
 
-public class FileEditor implements FileEditing{
+public class FileEditor implements FileEditing {
 
     @Override
     public void inputData(Path path, String input) {
         try {
-            OutputStream os = new FileOutputStream(path.toFile(),true);
+            OutputStream os = new FileOutputStream(path.toFile(), true);
             os.write(input.getBytes());
             os.write("\n".getBytes());
             os.flush();
@@ -21,10 +21,16 @@ public class FileEditor implements FileEditing{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
-    public void redactData() {
+    public void bankEditCitizenData() {
+
+    }
+
+    @Override
+    public void policeEditCitizenData() {
 
     }
 }

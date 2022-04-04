@@ -1,5 +1,7 @@
 package citizenData;
 
+import acc.Bank;
+
 public class Credit {
     private Bank bank;
     private double total;
@@ -12,7 +14,7 @@ public class Credit {
     @Override
     public String toString() {
         return "Credit{" +
-                "bank=" + bank +
+                "bank=" + bank.bankInfoToString() +
                 ", total=" + total +
                 '}';
     }

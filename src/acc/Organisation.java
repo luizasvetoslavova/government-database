@@ -3,7 +3,6 @@ package acc;
 import java.util.List;
 
 public class Organisation extends Account {
-
     List <User> users;
 
     public Organisation(String username, String password) {
@@ -12,5 +11,9 @@ public class Organisation extends Account {
 
     public void addUser(User user){
         users.add(user);
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 }

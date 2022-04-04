@@ -12,6 +12,10 @@ public interface Communication {
 
     String getPassword();
 
+    String getName();
+
+    String getAddress();
+
     Date getDate();
 
     PunishmentType getPunishmentType();
@@ -22,7 +26,7 @@ public interface Communication {
 
     double getPercentage();
 
-    long getId();
+    String getId();
 
     Country getCountry();
 
@@ -32,9 +36,21 @@ public interface Communication {
 
     void showIllegalInputMessage();
 
+    void showAlreadyExistingUserMessage();
+
     void showAdminOptions();
 
     void showUserOptions();
 
     void showOrganisationOptions();
+
+    void showAdminDataAddingOptions();
+
+    void showSuccessfulOperationMessage();
+
+    void showUserTypes();
+
+    void showBankEditingOptions();
+
+    void showPoliceEditingOptions();
 }

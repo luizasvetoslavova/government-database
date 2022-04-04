@@ -1,6 +1,7 @@
 package citizenData;
 
 import citizenData.lists.Gender;
+import database.government.CitizensDatabase;
 
 import java.util.List;
 import java.util.Set;
@@ -23,6 +24,20 @@ public class Citizen {
         this.name = name;
         this.id = id;
         this.address = address;
+
+        CitizensDatabase.getInstance().add(this);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public List<Possession> getPossessions() {
+        return possessions;
+    }
+
+    public List<Credit> getCredits() {
+        return credits;
     }
 
     @Override

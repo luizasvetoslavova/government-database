@@ -1,70 +1,70 @@
 package login;
 
+import acc.Account;
+import acc.Admin;
+import acc.Organisation;
+import acc.User;
+import database.accounts.AccountsDatabase;
 import login.authentication.Authenticator;
 import userCommunication.Communicator;
 
 public class LoginManager {
 
+    private static LoginManager instance;
+
     private final Authenticator authenticator;
     private final Communicator communicator;
+    private final InputOutput inputOutputManager;
+    private final AccountsDatabase accountsDatabase;
 
+    private Account logged;
     private boolean hasLoggedAccount;
 
-    public LoginManager() {
+    public static LoginManager getInstance() {
+        if (instance == null) {
+            instance = new LoginManager();
+        }
+        return instance;
+    }
+
+    private LoginManager() {
         authenticator = new Authenticator();
         communicator = new Communicator();
+        inputOutputManager = InputOutput.getInstance();
+        accountsDatabase = AccountsDatabase.getInstance();
     }
 
     public void startLoginProcess() {
 
         while (true) {
+
             do {
                 communicator.welcome();
 
                 String email = authenticator.checkEmail(communicator.getEmail());
-                authenticator.checkPassword(email, communicator.getPassword());
+                logged = AccountsDatabase.getInstance()
+                        .findAccount(email, authenticator.checkPassword(email, communicator.getPassword()));
+
                 hasLoggedAccount = true;
 
-            /* check account type - admin, user or an organisation
-            TODO: finish when file editing options are available */
-                if (authenticator.isEmailLegal(authenticator.getAdmins(), email)) {
-                    initAdminOperations();
-                } else if (authenticator.isEmailLegal(authenticator.getOrganisations(), email)) {
-                    initOrganisationOperations();
+                if (logged instanceof Admin) {
+                    inputOutputManager.initAdminOperations();
+
+                } else if (logged instanceof Organisation) {
+                    inputOutputManager.initOrganisationOperations((Organisation) logged);
+
+                } else if (logged instanceof User) {
+                    inputOutputManager.initUserOperations((User) logged);
+
                 } else {
-                    initUserOperations();
+                    communicator.showIllegalInputMessage();
                 }
 
             } while (hasLoggedAccount);
         }
     }
 
-    private void initAdminOperations() {
-        communicator.showAdminOptions();
-        switch (communicator.getScanner().nextLine()) {
-//            case "1" ->
-//            case "2" ->
-//            case "3" ->
-//            case "4" ->
-//            case "5" ->
-            default -> communicator.showIllegalInputMessage();
-        }
-    }
-
-    private void initOrganisationOperations() {
-        communicator.showOrganisationOptions();
-    }
-
-    private void initUserOperations() {
-        communicator.showUserOptions();
-        switch (communicator.getScanner().nextLine()) {
-//            case "1" ->
-//            case "2" ->
-            default -> communicator.showIllegalInputMessage();
-        }
-    }
-
-    private void logout() {
+    public void logout() {
         hasLoggedAccount = false;
     }
 }
