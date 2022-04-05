@@ -16,4 +16,11 @@ public class Organisation extends Account {
     public List<User> getUsers() {
         return users;
     }
+
+    @Override
+    public String toString() {
+        return "Organisation{" +
+                "users=" + users +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package login;
 
+import database.operations.FileEditor;
 import database.users.Bank;
 import acc.Organisation;
 import acc.User;
@@ -10,15 +11,22 @@ import database.government.CitizensDatabase;
 import database.operations.FileExtractor;
 import userCommunication.Communicator;
 
+import java.nio.file.Path;
 import java.util.stream.Collectors;
 
 public class InputOutput {
 
     private static InputOutput instance;
 
+    private final Path citizensFile;
+    private final Path organisationsFile;
+    private final Path usersFile;
+
     private final Communicator communicator;
+
     private final LoginManager loginManager;
     private final FileExtractor fileExtractor;
+    private final FileEditor fileEditor;
     private final CitizensDatabase citizensDatabase;
     private final AccountsDatabase accountsDatabase;
 
@@ -30,9 +38,14 @@ public class InputOutput {
     }
 
     private InputOutput() {
-        communicator = new Communicator();
-        fileExtractor = FileExtractor.getInstance();
+        citizensFile = Path.of("src", "database", "government", "Citizens.psv");
+        organisationsFile = Path.of("src", "database", "accounts", "Organisations.csv");
+        usersFile = Path.of("src", "database", "accounts", "Users.csv");
 
+        communicator = new Communicator();
+
+        fileExtractor = FileExtractor.getInstance();
+        fileEditor = FileEditor.getInstance();
         loginManager = LoginManager.getInstance();
         citizensDatabase = CitizensDatabase.getInstance();
         accountsDatabase = AccountsDatabase.getInstance();
@@ -55,11 +68,11 @@ public class InputOutput {
     private void addData() {
         communicator.showAdminDataAddingOptions();
         switch (communicator.getScanner().nextLine()) {
-            case "1" -> new Citizen(
-                    communicator.getName(), String.valueOf(
+
+            case "1" -> new Citizen(communicator.getName(), String.valueOf(
                     communicator.getId()), communicator.getAddress(), communicator.getGender());
 
-            case "2" -> new Organisation(communicator.getName(), communicator.getPassword());
+            case "2" -> new Organisation(communicator.getName(), communicator.getPassword()).toString();
             case "3" -> {
                 Organisation potentiallyEmpty = askForOrganisation();
 
@@ -81,8 +94,11 @@ public class InputOutput {
         communicator.showUserTypes();
 
         switch (communicator.getScanner().nextLine()) {
-            case "1" -> organisation.addUser(new Bank(communicator.getEmail(), communicator.getPassword(),
-                    communicator.getAddress(), communicator.getName()));
+            case "1" -> {
+                Bank newBank = new Bank(communicator.getEmail(), communicator.getPassword(),
+                        communicator.getAddress(), communicator.getName());
+                organisation.addUser(newBank);
+            }
 //            case "2" ->
             //TODO add police instance
             default -> communicator.showIllegalInputMessage();

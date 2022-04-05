@@ -4,32 +4,25 @@ import database.operations.FileEditor;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class BankDatabase {
 
-    private FileEditor fileEditor;
-
-    private Bank bank;
-    private Set<BankClient> clients;
+    private List<BankClient> clients;
 
     public BankDatabase(Bank bank) {
-        this.bank = bank;
-        fileEditor = FileEditor.getInstance();
+        clients = new ArrayList<>();
 
-        new File(String.valueOf(Path.of("src", "database", "organisations", "users",
-                "Bank" + bank.getSerialNumber() + ".csv")));
-
-        Path bankDatabase = Path.of("src", "database", "users",
+        Path bankFilePath = Path.of("src", "database", "users",
                 "Bank" + bank.getSerialNumber() + ".csv");
+        new File(String.valueOf(bankFilePath));
 
-        fileEditor.inputData(bankDatabase, bank.bankInfoToString());
-        fileEditor.inputData(Path.of("src", "database", "accounts", "Users.csv"),
-                bank.accountInfoToString());
-
-        clients = new HashSet<>();
+        FileEditor fileEditor = FileEditor.getInstance();
+        fileEditor.inputData(bankFilePath, bank.bankInfoToString() + "\n" + toString());
+        clients.forEach(client -> fileEditor.inputData(bankFilePath, client.toString().concat("\n")));
     }
 
     public BankClient findCitizen(String id) {
@@ -38,5 +31,16 @@ public class BankDatabase {
                 .filter(bankClient -> bankClient.getId().equals(id))
                 .collect(Collectors.toList())
                 .get(0);
+    }
+
+    public List<BankClient> getClients() {
+        return clients;
+    }
+
+    @Override
+    public String toString() {
+        return "BankDatabase{" +
+                "clients=" + clients +
+                '}';
     }
 }

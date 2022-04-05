@@ -1,2 +1,1 @@
-Citizen{name='penka'|id='34'|address='iskar 12'|gender=FEMALE|crimes=null|possessions=null|crossingBorders=null|credits=null|relatives=null|companies=null}
-Citizen{name='pencho'|id='34'|address='iskar 12'|gender=MALE|crimes=null|possessions=null|crossingBorders=null|credits=null|relatives=null|companies=null}
+BankClient{balance=0.0, debt=0.0, phoneNumber='null', email='null'}

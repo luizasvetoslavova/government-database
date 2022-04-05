@@ -3,19 +3,23 @@ package database.users;
 import acc.User;
 
 public class Bank extends User {
+
     private static int banksCount;
-    private int serialNumber;
+    private final int serialNumber;
 
-    private String address;
-    private String name;
+    private final String name;
+    private final String address;
 
-    private String email;
-    private String password;
+    private final String email;
+    private final String password;
 
-    private BankDatabase bankDatabase;
+    private final BankDatabase bankDatabase;
 
     public Bank(String email, String password, String address, String name) {
         super(email, password);
+        this.email = email;
+        this.password = password;
+
         this.address = address;
         this.name = name;
 
@@ -33,7 +37,6 @@ public class Bank extends User {
         return bankDatabase;
     }
 
-    //when saving into citizen data file, use that method
     public String bankInfoToString() {
         return "Bank{" +
                 "address='" + address + '\'' +
@@ -41,7 +44,6 @@ public class Bank extends User {
                 '}';
     }
 
-    //when saving into accounts file, use that method
     public String accountInfoToString() {
         return "Bank{" +
                 "email='" + email + '\'' +

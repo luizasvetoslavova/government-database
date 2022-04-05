@@ -38,6 +38,20 @@ public class FileEditor implements FileEditing {
     }
 
     @Override
+    public void replaceData(Path path, String input) {
+        try {
+            OutputStream os = new FileOutputStream(path.toFile());
+            os.write(input.getBytes());
+            os.write("\n".getBytes());
+            os.flush();
+            os.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void editCitizenData(Citizen citizen) {
         try {
             OutputStream os = new FileOutputStream(citizens.toFile());
