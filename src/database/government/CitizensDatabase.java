@@ -14,9 +14,6 @@ public class CitizensDatabase {
 
     private Set<Citizen> citizens;
 
-    private Path citizensFile;
-    private FileEditor fileEditor;
-
     public static CitizensDatabase getInstance() {
         if (instance == null) {
             instance = new CitizensDatabase();
@@ -26,14 +23,10 @@ public class CitizensDatabase {
 
     private CitizensDatabase() {
         citizens = new HashSet<>();
-        fileEditor = new FileEditor();
-
-        citizensFile = Path.of("src", "database", "government", "Citizens.psv");
     }
 
     public void add(Citizen citizen) {
         citizens.add(citizen);
-        fileEditor.inputData(citizensFile, citizen.toString());
     }
 
     public Citizen findCitizen(String id) {

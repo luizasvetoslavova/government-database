@@ -1,6 +1,6 @@
 package citizenData;
 
-import acc.Bank;
+import database.users.Bank;
 
 public class Credit {
     private Bank bank;

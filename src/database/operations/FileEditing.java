@@ -1,9 +1,11 @@
 package database.operations;
 
+import citizenData.Citizen;
+
 import java.nio.file.Path;
 
 public interface FileEditing {
     void inputData(Path path, String input);
-    void bankEditCitizenData();
-    void policeEditCitizenData();
+    void replaceData(Path path, String input);
+    void editCitizenData(Citizen citizen);
 }

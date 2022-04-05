@@ -1,14 +1,13 @@
-import acc.Bank;
-import acc.User;
-import citizenData.Citizen;
-import database.operations.FileEditor;
 
-import java.nio.file.Path;
+import citizenData.lists.Gender;
+import database.users.Bank;
+import database.users.BankClient;
 
 public class Main {
     public static void main(String[] args) {
-        Citizen c1= new Citizen("aziul", "1234443", "iskar 12");
-        Citizen c2 = new Citizen("ne znam", "6666", "roza 27");
-        Bank user = new Bank("penka", "34", "taka taka", "7984ne");
+        new Bank("bank@abv.bg", "12345678", "Mezdra centura", "DSK");
+        Bank b = new Bank("obb@gmail.com", "obb098765", "Vratsa probiva", "OBB");
+        b.getDatabase().getClients().add(new BankClient("12", "2doed", "ey3hd", Gender.FEMALE));
+        b.getDatabase().getClients().get(0).setBalance(23.54);
     }
 }

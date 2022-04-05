@@ -14,10 +14,9 @@ public class LoginManager {
 
     private final Authenticator authenticator;
     private final Communicator communicator;
-    private final InputOutput inputOutputManager;
+    private final InputOutput inputOutput;
     private final AccountsDatabase accountsDatabase;
 
-    private Account logged;
     private boolean hasLoggedAccount;
 
     public static LoginManager getInstance() {
@@ -30,31 +29,29 @@ public class LoginManager {
     private LoginManager() {
         authenticator = new Authenticator();
         communicator = new Communicator();
-        inputOutputManager = InputOutput.getInstance();
+        inputOutput = InputOutput.getInstance();
         accountsDatabase = AccountsDatabase.getInstance();
     }
 
     public void startLoginProcess() {
 
         while (true) {
+            communicator.welcome();
+
+            String email = authenticator.checkEmail(communicator.getEmail());
+            Account logged = accountsDatabase
+                    .findAccount(email, authenticator.checkPassword(email, communicator.getPassword()));
+            hasLoggedAccount = true;
 
             do {
-                communicator.welcome();
-
-                String email = authenticator.checkEmail(communicator.getEmail());
-                logged = AccountsDatabase.getInstance()
-                        .findAccount(email, authenticator.checkPassword(email, communicator.getPassword()));
-
-                hasLoggedAccount = true;
-
                 if (logged instanceof Admin) {
-                    inputOutputManager.initAdminOperations();
+                    inputOutput.initAdminOperations();
 
                 } else if (logged instanceof Organisation) {
-                    inputOutputManager.initOrganisationOperations((Organisation) logged);
+                    inputOutput.initOrganisationOperations((Organisation) logged);
 
                 } else if (logged instanceof User) {
-                    inputOutputManager.initUserOperations((User) logged);
+                    inputOutput.initUserOperations((User) logged);
 
                 } else {
                     communicator.showIllegalInputMessage();

@@ -16,15 +16,12 @@ public class Authenticator implements Authentication {
     private final Path users;
 
     public Authenticator() {
-        fileExtractor = new FileExtractor();
+        fileExtractor = FileExtractor.getInstance();
         communicator = new Communicator();
 
-        admins = Path.of("src", "database", "accounts",
-                "Admins.csv");
-        organisations = Path.of("src", "database", "accounts",
-                "Organisations.csv");
-        users = Path.of("src", "database", "accounts",
-                "Users.csv");
+        admins = Path.of("src", "database", "accounts", "Admins.csv");
+        organisations = Path.of("src", "database", "accounts", "Organisations.csv");
+        users = Path.of("src", "database", "accounts", "Users.csv");
     }
 
     @Override
@@ -63,23 +60,11 @@ public class Authenticator implements Authentication {
         List<String> emailsAndPasswords = List.of(fileExtractor.extractWholeData(admins).split("\r\n"));
 
         for (int i = 0; i < emailsAndPasswords.size(); i++) {
-            if(emailsAndPasswords.get(i).split(",")[0].equals(email) &&
+            if (emailsAndPasswords.get(i).split(",")[0].equals(email) &&
                     emailsAndPasswords.get(i).split(",")[1].equals(password)) {
                 return true;
             }
         }
         return false;
-    }
-
-    public Path getAdmins() {
-        return admins;
-    }
-
-    public Path getOrganisations() {
-        return organisations;
-    }
-
-    public Path getUsers() {
-        return users;
     }
 }
