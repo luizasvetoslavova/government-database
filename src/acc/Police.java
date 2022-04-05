@@ -2,11 +2,13 @@ package acc;
 
 public class Police extends User{
     private static Police instance;
-    private String name;
+    private String password;
     private String email;
 
-    public Police(String email, String password) {
+    private Police(String email, String password) {
         super(email, password);
+        this.email = email;
+        this.password = password;
     }
 
     public static Police getInstance() {
@@ -16,10 +18,10 @@ public class Police extends User{
         return instance;
     }
 
-
-    public String accountInfoToString() {
+    @Override
+    public String toString() {
         return "Police{" +
-                "name='" + name + '\'' +
+                "password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
