@@ -38,4 +38,8 @@ public class BankDatabase {
     public List<Long> getBalances() {
         return balances;
     }
+
+    public Set<Citizen> getClients() {
+        return clients;
+    }
 }

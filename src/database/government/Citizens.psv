@@ -1,4 +1,2 @@
-Citizen{name='aziul'| id='1234443'| address='iskar 12'| gender=null| punishments=null| possessions=null| crossingBorders=null| credits=null| relatives=null| companies=null}
-Citizen{name='ne znam'| id='6666'| address='roza 27'| gender=null| punishments=null| possessions=null| crossingBorders=null| credits=null| relatives=null| companies=null}
-Citizen{name='aziul'| id='1234443'| address='iskar 12'| gender=null| punishments=null| possessions=null| crossingBorders=null| credits=null| relatives=null| companies=null}
-Citizen{name='ne znam'| id='6666'| address='roza 27'| gender=null| punishments=null| possessions=null| crossingBorders=null| credits=null| relatives=null| companies=null}
+Citizen{name='penka'|id='34'|address='iskar 12'|gender=FEMALE|crimes=null|possessions=null|crossingBorders=null|credits=null|relatives=null|companies=null}
+Citizen{name='pencho'|id='34'|address='iskar 12'|gender=MALE|crimes=null|possessions=null|crossingBorders=null|credits=null|relatives=null|companies=null}

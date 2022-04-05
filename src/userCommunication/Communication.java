@@ -1,6 +1,7 @@
 package userCommunication;
 
 import citizenData.lists.Country;
+import citizenData.lists.Gender;
 import citizenData.lists.PossessionType;
 import citizenData.lists.PunishmentType;
 
@@ -22,11 +23,13 @@ public interface Communication {
 
     PossessionType getPossessionType();
 
+    Gender getGender();
+
     double getAmountOfMoney();
 
     double getPercentage();
 
-    String getId();
+    long getId();
 
     Country getCountry();
 

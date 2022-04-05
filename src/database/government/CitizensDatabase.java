@@ -26,7 +26,7 @@ public class CitizensDatabase {
 
     private CitizensDatabase() {
         citizens = new HashSet<>();
-        fileEditor = new FileEditor();
+        fileEditor = FileEditor.getInstance();
 
         citizensFile = Path.of("src", "database", "government", "Citizens.psv");
     }

@@ -20,10 +20,11 @@ public class Citizen {
     private Set<Citizen> relatives;
     private Set<Company> companies;
 
-    public Citizen(String name, String id, String address) {
+    public Citizen(String name, String id, String address, Gender gender) {
         this.name = name;
         this.id = id;
         this.address = address;
+        this.gender = gender;
 
         CitizensDatabase.getInstance().add(this);
     }
@@ -40,19 +41,47 @@ public class Citizen {
         return credits;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Set<Citizen> getRelatives() {
+        return relatives;
+    }
+
+    public Set<Company> getCompanies() {
+        return companies;
+    }
+
+    public List<Crime> getCrimes() {
+        return crimes;
+    }
+
+    public List<CrossingBorder> getCrossingBorders() {
+        return crossingBorders;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
     @Override
     public String toString() {
         return "Citizen{" +
                 "name='" + name + '\'' +
-                "| id='" + id + '\'' +
-                "| address='" + address + '\'' +
-                "| gender=" + gender +
-                "| punishments=" + crimes +
-                "| possessions=" + possessions +
-                "| crossingBorders=" + crossingBorders +
-                "| credits=" + credits +
-                "| relatives=" + relatives +
-                "| companies=" + companies +
+                "|id='" + id + '\'' +
+                "|address='" + address + '\'' +
+                "|gender=" + gender +
+                "|crimes=" + crimes +
+                "|possessions=" + possessions +
+                "|crossingBorders=" + crossingBorders +
+                "|credits=" + credits +
+                "|relatives=" + relatives +
+                "|companies=" + companies +
                 '}';
     }
 }

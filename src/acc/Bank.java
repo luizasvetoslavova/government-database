@@ -1,8 +1,7 @@
 package acc;
 
-import database.organisations.BankDatabase;
-
 public class Bank extends User {
+
     private String address;
     private String name;
     private String email;

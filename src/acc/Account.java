@@ -16,4 +16,12 @@ public abstract class Account {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

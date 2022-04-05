@@ -4,7 +4,9 @@ import acc.*;
 import database.operations.FileEditor;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,7 +40,7 @@ public class AccountsDatabase {
         organisations = new HashSet<>();
         users = new HashSet<>();
 
-        fileEditor = new FileEditor();
+        fileEditor = FileEditor.getInstance();
 
         adminsFile = Path.of("src", "database", "accounts", "Admins.csv");
         organisationsFile = Path.of("src", "database", "accounts", "Organisations.csv");
@@ -74,15 +76,7 @@ public class AccountsDatabase {
                 .get(0);
     }
 
-    public Set<Admin> getAdmins() {
-        return admins;
-    }
-
     public Set<Organisation> getOrganisations() {
         return organisations;
-    }
-
-    public Set<User> getUsers() {
-        return users;
     }
 }
