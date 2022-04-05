@@ -1,9 +1,8 @@
-import citizenData.Citizen;
-import citizenData.lists.Gender;
+
+import database.users.Bank;
 
 public class Main {
     public static void main(String[] args) {
-        Citizen user = new Citizen("penka", "34", "iskar 12", Gender.FEMALE);
-        Citizen user2 = new Citizen("pencho", "34", "iskar 12", Gender.MALE);
+        Bank bank = new Bank("12", "34", "343", "34");
     }
 }

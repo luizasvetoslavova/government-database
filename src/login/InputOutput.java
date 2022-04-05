@@ -1,16 +1,13 @@
 package login;
 
-import acc.Bank;
+import database.users.Bank;
 import acc.Organisation;
 import acc.User;
 import citizenData.Citizen;
 import citizenData.Credit;
 import database.accounts.AccountsDatabase;
 import database.government.CitizensDatabase;
-import database.operations.FileEditor;
-import database.operations.FileExtraction;
 import database.operations.FileExtractor;
-import database.organisations.BankDatabase;
 import userCommunication.Communicator;
 
 import java.util.stream.Collectors;
@@ -156,8 +153,8 @@ public class InputOutput {
                                 .collect(Collectors.toList())
                                 .get(0));
             }
-//            case "3" ->
-            //TODO add balance change function
+            case "3" -> bank.getDatabase().findCitizen(String.valueOf(communicator.getId()))
+                    .setBalance(communicator.getAmountOfMoney());
             default -> communicator.showIllegalInputMessage();
         }
     }

@@ -17,7 +17,6 @@ public class LoginManager {
     private final InputOutput inputOutput;
     private final AccountsDatabase accountsDatabase;
 
-    private Account logged;
     private boolean hasLoggedAccount;
 
     public static LoginManager getInstance() {
@@ -37,13 +36,14 @@ public class LoginManager {
     public void startLoginProcess() {
 
         while (true) {
-            do {
-                communicator.welcome();
-                String email = authenticator.checkEmail(communicator.getEmail());
-                logged = accountsDatabase
-                        .findAccount(email, authenticator.checkPassword(email, communicator.getPassword()));
-                hasLoggedAccount = true;
+            communicator.welcome();
 
+            String email = authenticator.checkEmail(communicator.getEmail());
+            Account logged = accountsDatabase
+                    .findAccount(email, authenticator.checkPassword(email, communicator.getPassword()));
+            hasLoggedAccount = true;
+
+            do {
                 if (logged instanceof Admin) {
                     inputOutput.initAdminOperations();
 
