@@ -5,6 +5,7 @@ import acc.Organisation;
 import acc.User;
 import citizenData.Citizen;
 import citizenData.Credit;
+import citizenData.IdReaderImpl;
 import database.accounts.AccountsDatabase;
 import database.government.CitizensDatabase;
 import database.operations.FileExtractor;
@@ -18,6 +19,7 @@ public class InputOutput {
     private static InputOutput instance;
 
     private final Communicator communicator;
+    private final IdReaderImpl idReader;
     private final LoginManager loginManager;
     private final FileExtractor fileExtractor;
     private final CitizensDatabase citizensDatabase;
@@ -33,6 +35,7 @@ public class InputOutput {
     private InputOutput() {
         communicator = new Communicator();
         fileExtractor = new FileExtractor();
+        idReader = new IdReaderImpl();
 
         loginManager = LoginManager.getInstance();
         citizensDatabase = CitizensDatabase.getInstance();
@@ -110,7 +113,8 @@ public class InputOutput {
                     policeEdit();
                 }
             }
-            case "3" -> loginManager.logout();
+            case "3" -> idReader.getIdInfo();
+            case "4" -> loginManager.logout();
             default -> communicator.showIllegalInputMessage();
         }
     }

@@ -13,7 +13,7 @@ public class Police extends User{
 
     public static Police getInstance() {
         if(instance == null) {
-            instance = new Police();
+            //instance = new Police();
         }
         return instance;
     }
