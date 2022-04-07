@@ -20,7 +20,7 @@ public class BankDatabase {
     private List<String> emails;
 
     public static BankDatabase getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new BankDatabase();
         }
         return instance;

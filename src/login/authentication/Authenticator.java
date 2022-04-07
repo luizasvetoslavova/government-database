@@ -63,7 +63,7 @@ public class Authenticator implements Authentication {
         List<String> emailsAndPasswords = List.of(fileExtractor.extractWholeData(admins).split("\r\n"));
 
         for (int i = 0; i < emailsAndPasswords.size(); i++) {
-            if(emailsAndPasswords.get(i).split(",")[0].equals(email) &&
+            if (emailsAndPasswords.get(i).split(",")[0].equals(email) &&
                     emailsAndPasswords.get(i).split(",")[1].equals(password)) {
                 return true;
             }

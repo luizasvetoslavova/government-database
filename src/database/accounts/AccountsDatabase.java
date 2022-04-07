@@ -60,7 +60,7 @@ public class AccountsDatabase {
             if (account instanceof Bank) {
                 users.add((Bank) account);
                 fileEditor.inputData(usersFile, ((Bank) account).accountInfoToString());
-            } else if (account instanceof Police){
+            } else if (account instanceof Police) {
                 users.add((Police) account);
                 fileEditor.inputData(usersFile, ((Police) account).toString());
             }
