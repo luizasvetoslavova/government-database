@@ -9,5 +9,5 @@ public interface IdReader {
     Date getBirthDate(long id);
     Region getBirthRegion(long id);
     Gender getGender(long id);
-    String getIdInfo();
+    String getIdInfo(long id);
 }

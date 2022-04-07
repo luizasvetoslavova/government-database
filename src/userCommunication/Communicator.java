@@ -162,7 +162,8 @@ public class Communicator implements Communication {
         System.out.print("You logged as a user. \n" +
                 "1. View data for citizen \n" +
                 "2. Edit data for citizen \n" +
-                "3. Logout \n" +
+                "3. Get ID information \n"+
+                "4. Logout \n" +
                 "Your choice: ");
     }
 

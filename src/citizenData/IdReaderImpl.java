@@ -12,7 +12,7 @@ public class IdReaderImpl implements IdReader {
     private long id;
 
     @Override
-    public String getIdInfo() {
+    public String getIdInfo(long id) {
         String birthDate = String.valueOf(getBirthDate(id));
         String region = String.valueOf(getBirthRegion(id));
         String gender = String.valueOf(getGender(id));
