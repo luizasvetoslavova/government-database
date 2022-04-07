@@ -1,5 +1,5 @@
 package citizenData.lists;
 
 public enum Relatives {
-    MOTHER,FATHER,SIBLING
+    MOTHER, FATHER, SIBLING
 }

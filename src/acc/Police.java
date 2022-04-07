@@ -1,6 +1,6 @@
 package acc;
 
-public class Police extends User{
+public class Police extends User {
     private static Police instance;
     private String password;
     private String email;
@@ -12,7 +12,7 @@ public class Police extends User{
     }
 
     public static Police getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             //instance = new Police();
         }
         return instance;
