@@ -18,9 +18,15 @@ public class Validator implements Validation {
     @Override
     public long checkId(String input) {
         long id;
+
         try {
             id = Long.parseLong(input);
         } catch (NumberFormatException e) {
+            communicator.showIllegalInputMessage();
+            id = communicator.getId();
+        }
+
+        if(String.valueOf(id).length() != 10) {
             communicator.showIllegalInputMessage();
             id = communicator.getId();
         }
@@ -30,6 +36,7 @@ public class Validator implements Validation {
     @Override
     public Date checkDate(String input) {
         Date date;
+
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(input);
         } catch (ParseException e) {
@@ -42,6 +49,7 @@ public class Validator implements Validation {
     @Override
     public double checkAmountOfMoney(String input) {
         double amount;
+
         try {
             amount = Double.parseDouble(input);
         } catch (NumberFormatException e) {
@@ -54,6 +62,7 @@ public class Validator implements Validation {
     @Override
     public double checkPercentage(String input) {
         double percent;
+
         try {
             percent = Double.parseDouble(input);
         } catch (NumberFormatException e) {
@@ -66,6 +75,7 @@ public class Validator implements Validation {
     @Override
     public Country checkCountry(String input) {
         Country country;
+
         try {
             country = Country.valueOf(input);
         } catch (IllegalArgumentException e) {

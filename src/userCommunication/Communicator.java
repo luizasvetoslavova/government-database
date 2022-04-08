@@ -1,6 +1,7 @@
 package userCommunication;
 
 import citizenData.lists.Country;
+import citizenData.lists.Gender;
 import citizenData.lists.PossessionType;
 import citizenData.lists.PunishmentType;
 import userCommunication.validation.Validator;
@@ -90,6 +91,20 @@ public class Communicator implements Communication {
         };
     }
 
+    @Override
+    public Gender getGender() {
+        System.out.print("Gender: \n" +
+                "1. Male \n" +
+                "2. Female \n" +
+                "Your choice: ");
+
+        return switch (scanner.nextLine()) {
+            case "1" -> Gender.MALE;
+            case "2" -> Gender.FEMALE;
+            default -> getGender();
+        };
+    }
+
     public double getAmountOfMoney() {
         System.out.println("Amount of money: ");
         return validator.checkAmountOfMoney(scanner.nextLine());
@@ -102,9 +117,9 @@ public class Communicator implements Communication {
     }
 
     @Override
-    public String getId() {
+    public long getId() {
         System.out.println("ID: ");
-        return String.valueOf(validator.checkId(scanner.nextLine()));
+        return validator.checkId(scanner.nextLine());
     }
 
     @Override

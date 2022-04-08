@@ -1,4 +1,2 @@
-Citizen{name='aziul'| id='1234443'| address='iskar 12'| gender=null| punishments=null| possessions=null| crossingBorders=null| credits=null| relatives=null| companies=null}
-Citizen{name='ne znam'| id='6666'| address='roza 27'| gender=null| punishments=null| possessions=null| crossingBorders=null| credits=null| relatives=null| companies=null}
-Citizen{name='aziul'| id='1234443'| address='iskar 12'| gender=null| punishments=null| possessions=null| crossingBorders=null| credits=null| relatives=null| companies=null}
-Citizen{name='ne znam'| id='6666'| address='roza 27'| gender=null| punishments=null| possessions=null| crossingBorders=null| credits=null| relatives=null| companies=null}
+BankClient{balance=0.0, debt=0.0, phoneNumber='null', email='null'}
+BankClient{balance=0.0, debt=0.0, phoneNumber='null', email='null'}
