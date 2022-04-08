@@ -1,20 +1,24 @@
 package login;
 
-import acc.Account;
-import acc.Admin;
-import acc.Organisation;
-import acc.User;
-import database.accounts.AccountsDatabase;
-import login.authentication.Authenticator;
-import userCommunication.Communicator;
+import accounts.bases.Account;
+import accounts.Admin;
+import accounts.Organisation;
+import accounts.bases.User;
+import database.AccountsDatabase;
+import login.IO.Communication;
+import login.IO.Communicator;
+import login.IO.IO;
+import login.IO.InputOutput;
+import login.validation.Authentication;
+import login.validation.Authenticator;
 
 public class LoginManager {
 
     private static LoginManager instance;
 
-    private final Authenticator authenticator;
-    private final Communicator communicator;
-    private final InputOutput inputOutput;
+    private final Authentication authentication;
+    private final Communication communication;
+    private final IO inputOutput;
     private final AccountsDatabase accountsDatabase;
 
     private boolean hasLoggedAccount;
@@ -27,8 +31,8 @@ public class LoginManager {
     }
 
     private LoginManager() {
-        authenticator = new Authenticator();
-        communicator = new Communicator();
+        authentication = new Authenticator();
+        communication = new Communicator();
         inputOutput = InputOutput.getInstance();
         accountsDatabase = AccountsDatabase.getInstance();
     }
@@ -36,11 +40,12 @@ public class LoginManager {
     public void startLoginProcess() {
 
         while (true) {
-            communicator.welcome();
+            communication.welcome();
 
-            String email = authenticator.checkEmail(communicator.getEmail());
-            Account logged = accountsDatabase
-                    .findAccount(email, authenticator.checkPassword(email, communicator.getPassword()));
+            String email = communication.getEmail();
+            authentication.checkInputData(email, communication.getPassword());
+
+            Account logged = accountsDatabase.findBy(email);
             hasLoggedAccount = true;
 
             do {
@@ -54,7 +59,7 @@ public class LoginManager {
                     inputOutput.initUserOperations((User) logged);
 
                 } else {
-                    communicator.showIllegalInputMessage();
+                    communication.showIllegalInputMessage();
                 }
 
             } while (hasLoggedAccount);
