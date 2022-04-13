@@ -10,10 +10,19 @@ import java.util.Date;
 
 public class Validator implements Validation {
 
+    private static Validator instance;
+
     private final Communication communication;
 
-    public Validator() {
-        communication = new Communicator();
+    public static Validator getInstance() {
+        if (instance == null) {
+            instance = new Validator();
+        }
+        return instance;
+    }
+
+    private Validator() {
+        communication = Communicator.getInstance();
     }
 
     @Override
@@ -27,7 +36,7 @@ public class Validator implements Validation {
             id = communication.getId();
         }
 
-        if(String.valueOf(id).length() != 10) {
+        if (String.valueOf(id).length() != 10) {
             communication.showIllegalInputMessage();
             id = communication.getId();
         }

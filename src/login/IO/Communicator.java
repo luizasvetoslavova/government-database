@@ -12,11 +12,20 @@ import java.util.Scanner;
 
 public class Communicator implements Communication {
 
+    private static Communicator instance;
+
     private final Validation validation;
     private final Scanner scanner;
 
-    public Communicator() {
-        validation = new Validator();
+    public static Communicator getInstance() {
+        if (instance == null) {
+            instance = new Communicator();
+        }
+        return instance;
+    }
+
+    private Communicator() {
+        validation = Validator.getInstance();
         scanner = new Scanner(System.in);
     }
 
@@ -136,7 +145,7 @@ public class Communicator implements Communication {
 
     @Override
     public void showAlreadyExistingUserMessage() {
-        System.out.println("First user of that organisation already exists.");
+        System.out.println("User already exists.");
     }
 
     @Override
@@ -162,7 +171,8 @@ public class Communicator implements Communication {
         System.out.print("You logged as a user. \n" +
                 "1. View data for citizen \n" +
                 "2. Edit data for citizen \n" +
-                "3. Logout \n" +
+                "3. Get ID information \n" +
+                "4. Logout \n" +
                 "Your choice: ");
     }
 

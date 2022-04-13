@@ -6,10 +6,19 @@ import login.IO.Communicator;
 
 public class Authenticator implements Authentication {
 
+    private static Authenticator instance;
+
     private final Communication communication;
 
-    public Authenticator() {
-        communication = new Communicator();
+    public static Authenticator getInstance() {
+        if (instance == null) {
+            instance = new Authenticator();
+        }
+        return instance;
+    }
+
+    private Authenticator() {
+        communication = Communicator.getInstance();
     }
 
     @Override

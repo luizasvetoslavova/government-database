@@ -10,7 +10,7 @@ public abstract class Account extends Record implements Serializable {
     private final String password;
 
     public Account(String email, String password) {
-        //account's id's its email because it can't be used twice
+        //account's ID's its email because it can't be used more than once
         super(email);
         this.email = email;
         this.password = password;

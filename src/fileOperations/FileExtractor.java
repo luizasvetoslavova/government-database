@@ -1,8 +1,6 @@
-package fileOperators;
+package fileOperations;
 
 import citizenData.elements.Citizen;
-
-import java.io.*;
 
 public class FileExtractor implements FileExtraction {
 
@@ -17,29 +15,6 @@ public class FileExtractor implements FileExtraction {
 
     private FileExtractor() {
 
-    }
-
-    @Override
-    public String extractWholeData(String file) {
-        StringBuilder data = new StringBuilder();
-
-        try {
-            InputStream is = new FileInputStream(file);
-            int character = 0;
-            do {
-                try {
-                    character = is.read();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                data.append((char) character);
-            } while (character != -1);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return data.toString();
     }
 
     @Override

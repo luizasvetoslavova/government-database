@@ -1,6 +1,7 @@
 package citizenData.elements;
 
 import accounts.bases.Record;
+import citizenData.id.IdReaderImpl;
 import citizenData.lists.Gender;
 import database.CitizensDatabase;
 
@@ -28,6 +29,7 @@ public class Citizen extends Record implements Serializable {
         this.name = name;
         this.id = id;
         this.address = address;
+        this.gender = IdReaderImpl.getInstance().getGender(Long.parseLong(id));
 
         CitizensDatabase.getInstance().add(this);
     }
@@ -50,6 +52,22 @@ public class Citizen extends Record implements Serializable {
 
     public Gender getGender() {
         return gender;
+    }
+
+    @Override
+    public String toString() {
+        return "Citizen{" +
+                "name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", address='" + address + '\'' +
+                ", gender=" + gender +
+                ", crimes=" + crimes +
+                ", possessions=" + possessions +
+                ", crossingBorders=" + crossingBorders +
+                ", credits=" + credits +
+                ", relatives=" + relatives +
+                ", companies=" + companies +
+                '}';
     }
 
     public String bankDataToString() {

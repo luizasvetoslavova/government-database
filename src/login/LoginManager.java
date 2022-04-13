@@ -31,8 +31,8 @@ public class LoginManager {
     }
 
     private LoginManager() {
-        authentication = new Authenticator();
-        communication = new Communicator();
+        authentication = Authenticator.getInstance();
+        communication = Communicator.getInstance();
         inputOutput = InputOutput.getInstance();
         accountsDatabase = AccountsDatabase.getInstance();
     }

@@ -9,6 +9,29 @@ import java.util.Date;
 
 public class IdReaderImpl implements IdReader {
 
+   private static IdReaderImpl instance;
+
+   public static IdReaderImpl getInstance() {
+       if(instance == null) {
+           instance = new IdReaderImpl();
+       }
+       return instance;
+   }
+
+   private IdReaderImpl() {
+
+   }
+
+    @Override
+    public String getIdInfo(long id) {
+        String birthDate = String.valueOf(getBirthDate(id));
+        String region = String.valueOf(getBirthRegion(id));
+        String gender = String.valueOf(getGender(id));
+        return "Born: " + birthDate + "\n" +
+                "In: " + region + "\n" +
+                "Gender: " + gender;
+    }
+
     @Override
     public Date getBirthDate(long id) {
 
