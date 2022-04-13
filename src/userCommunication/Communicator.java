@@ -159,16 +159,9 @@ public class Communicator implements Communication {
     @Override
     public void showOrganisationOptions() {
         System.out.print("You logged as an organisation. \n" +
-                "1. Add user \n" +
+                "1. Add bank \n" +
                 "2. View all users of yours " +
                 "3. Logout \n" +
-                "Your choice: ");
-    }
-
-    @Override
-    public void showUserTypes() {
-        System.out.print("1. Bank \n" +
-                "2. Police \n" +
                 "Your choice: ");
     }
 
@@ -177,7 +170,8 @@ public class Communicator implements Communication {
         System.out.print("You logged as a user. \n" +
                 "1. View data for citizen \n" +
                 "2. Edit data for citizen \n" +
-                "3. Logout \n" +
+                "3. Get ID information \n" +
+                "4. Logout \n" +
                 "Your choice: ");
     }
 

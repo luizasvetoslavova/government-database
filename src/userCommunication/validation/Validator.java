@@ -23,7 +23,7 @@ public class Validator implements Validation {
             id = Long.parseLong(input);
         } catch (NumberFormatException e) {
             communicator.showIllegalInputMessage();
-            id = communicator.getId();
+            id = Long.parseLong(communicator.getId());
         }
 
         if(String.valueOf(id).length() != 10) {

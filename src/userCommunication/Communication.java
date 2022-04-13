@@ -51,8 +51,6 @@ public interface Communication {
 
     void showSuccessfulOperationMessage();
 
-    void showUserTypes();
-
     void showBankEditingOptions();
 
     void showPoliceEditingOptions();

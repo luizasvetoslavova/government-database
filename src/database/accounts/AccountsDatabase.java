@@ -44,8 +44,8 @@ public class AccountsDatabase {
         } else {
             if (account instanceof Bank) {
                 users.add((Bank) account);
-            } else {
-                // TODO instanceof police
+            } else if (account instanceof Police) {
+                users.add((Police) account);
             }
         }
     }

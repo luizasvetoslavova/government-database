@@ -8,6 +8,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class IdReaderImpl implements IdReader {
+
+    private long id;
+
+    @Override
+    public String getIdInfo(long id) {
+        String birthDate = String.valueOf(getBirthDate(id));
+        String region = String.valueOf(getBirthRegion(id));
+        String gender = String.valueOf(getGender(id));
+        return "Born: " + birthDate + "\n" +
+                "In: " + region + "\n" +
+                "Gender: " + gender;
+    }
+
     @Override
     public Date getBirthDate(long id) {
         Date date = null;
