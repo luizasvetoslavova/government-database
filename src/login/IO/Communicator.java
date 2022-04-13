@@ -160,7 +160,7 @@ public class Communicator implements Communication {
     @Override
     public void showOrganisationOptions() {
         System.out.print("You logged as an organisation. \n" +
-                "1. Add user \n" +
+                "1. Add bank \n" +
                 "2. View all users of yours " +
                 "3. Logout \n" +
                 "Your choice: ");
