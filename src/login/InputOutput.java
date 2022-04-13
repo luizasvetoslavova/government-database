@@ -6,6 +6,7 @@ import acc.Organisation;
 import acc.User;
 import citizenData.Citizen;
 import citizenData.Credit;
+import citizenData.IdReaderImpl;
 import database.accounts.AccountsDatabase;
 import database.government.CitizensDatabase;
 import database.operations.FileExtractor;
@@ -18,15 +19,12 @@ public class InputOutput {
 
     private static InputOutput instance;
 
-    private final Path citizensFile;
-    private final Path organisationsFile;
-    private final Path usersFile;
-
     private final Communicator communicator;
 
+    private final IdReaderImpl idReader;
     private final LoginManager loginManager;
     private final FileExtractor fileExtractor;
-    private final FileEditor fileEditor;
+
     private final CitizensDatabase citizensDatabase;
     private final AccountsDatabase accountsDatabase;
 
@@ -38,14 +36,11 @@ public class InputOutput {
     }
 
     private InputOutput() {
-        citizensFile = Path.of("src", "database", "government", "Citizens.psv");
-        organisationsFile = Path.of("src", "database", "accounts", "Organisations.csv");
-        usersFile = Path.of("src", "database", "accounts", "Users.csv");
 
         communicator = new Communicator();
-
         fileExtractor = FileExtractor.getInstance();
-        fileEditor = FileEditor.getInstance();
+        idReader = new IdReaderImpl();
+
         loginManager = LoginManager.getInstance();
         citizensDatabase = CitizensDatabase.getInstance();
         accountsDatabase = AccountsDatabase.getInstance();
@@ -55,12 +50,19 @@ public class InputOutput {
         communicator.showAdminOptions();
 
         switch (communicator.getScanner().nextLine()) {
-            case "1" -> addData();
 
             case "2" -> communicator.show(citizensDatabase.findCitizen(
                     String.valueOf(communicator.getId())).toString());
 
-            case "3" -> loginManager.logout();
+            case "1" -> {
+                addData();
+                communicator.showSuccessfulOperationMessage();
+            }
+
+            case "3" -> {
+                loginManager.logout();
+                communicator.showSuccessfulOperationMessage();
+            }
             default -> communicator.showIllegalInputMessage();
         }
     }
@@ -68,20 +70,28 @@ public class InputOutput {
     private void addData() {
         communicator.showAdminDataAddingOptions();
         switch (communicator.getScanner().nextLine()) {
+            case "1" -> {
+                new Citizen(
+                        communicator.getName(), String.valueOf(communicator.getId()),
+                        communicator.getAddress(), communicator.getGender());
+                communicator.showSuccessfulOperationMessage();
+            }
 
-            case "1" -> new Citizen(communicator.getName(), String.valueOf(
-                    communicator.getId()), communicator.getAddress(), communicator.getGender());
+            case "2" -> {
+                new Organisation(communicator.getName(), communicator.getPassword());
+                communicator.showSuccessfulOperationMessage();
+            }
 
-            case "2" -> new Organisation(communicator.getName(), communicator.getPassword()).toString();
             case "3" -> {
                 Organisation potentiallyEmpty = askForOrganisation();
 
-                if(potentiallyEmpty == null) {
+                if (potentiallyEmpty == null) {
                     communicator.showIllegalInputMessage();
                     return;
                 }
                 if (potentiallyEmpty.getUsers().get(0) == null) {
-                    addUser(potentiallyEmpty);
+                    addBank(potentiallyEmpty);
+
                 } else {
                     communicator.showAlreadyExistingUserMessage();
                 }
@@ -90,19 +100,10 @@ public class InputOutput {
         }
     }
 
-    private void addUser(Organisation organisation) {
-        communicator.showUserTypes();
-
-        switch (communicator.getScanner().nextLine()) {
-            case "1" -> {
-                Bank newBank = new Bank(communicator.getEmail(), communicator.getPassword(),
-                        communicator.getAddress(), communicator.getName());
-                organisation.addUser(newBank);
-            }
-//            case "2" ->
-            //TODO add police instance
-            default -> communicator.showIllegalInputMessage();
-        }
+    private void addBank(Organisation organisation) {
+        organisation.addUser(new Bank(communicator.getEmail(), communicator.getPassword(),
+                communicator.getAddress(), communicator.getName()));
+        communicator.showSuccessfulOperationMessage();
     }
 
     private Organisation askForOrganisation() {
@@ -120,9 +121,13 @@ public class InputOutput {
         communicator.showOrganisationOptions();
 
         switch (communicator.getScanner().nextLine()) {
-            case "1" -> addUser(organisation);
             case "2" -> organisation.getUsers().forEach(user -> communicator.show(user.toString().concat("\n")));
             case "3" -> loginManager.logout();
+            case "1" -> {
+                organisation.addUser(new Bank(communicator.getEmail(), communicator.getPassword(),
+                        communicator.getAddress(), communicator.getName()));
+                communicator.showSuccessfulOperationMessage();
+            }
             default -> communicator.showIllegalInputMessage();
         }
     }
@@ -140,16 +145,29 @@ public class InputOutput {
                             citizensDatabase.findCitizen(String.valueOf(communicator.getId()))));
                 }
             }
+
             case "2" -> {
                 Citizen toBeEdited = citizensDatabase.findCitizen(String.valueOf(communicator.getId()));
 
                 if (user instanceof Bank) {
                     bankEdit(toBeEdited, (Bank) user);
+                    communicator.showSuccessfulOperationMessage();
                 } else {
                     policeEdit();
+                    communicator.showSuccessfulOperationMessage();
                 }
             }
-            case "3" -> loginManager.logout();
+
+            case "3" -> {
+                idReader.getIdInfo(Long.parseLong(String.valueOf(communicator.getId())));
+                communicator.showSuccessfulOperationMessage();
+            }
+
+            case "4" -> {
+                loginManager.logout();
+                communicator.showSuccessfulOperationMessage();
+            }
+
             default -> communicator.showIllegalInputMessage();
         }
     }
@@ -158,8 +176,10 @@ public class InputOutput {
         communicator.showBankEditingOptions();
 
         switch (communicator.getScanner().nextLine()) {
-            case "1" -> citizen.getCredits().add(new Credit(bank, communicator.getAmountOfMoney()));
-
+            case "1" -> {
+                citizen.getCredits().add(new Credit(bank, communicator.getAmountOfMoney()));
+                communicator.showSuccessfulOperationMessage();
+            }
             case "2" -> {
                 String name = communicator.getName();
                 citizen.getPossessions().remove(
@@ -168,6 +188,7 @@ public class InputOutput {
                                 .filter(possession -> possession.getName().equals(name))
                                 .collect(Collectors.toList())
                                 .get(0));
+                communicator.showSuccessfulOperationMessage();
             }
             case "3" -> bank.getDatabase().findCitizen(String.valueOf(communicator.getId()))
                     .setBalance(communicator.getAmountOfMoney());
