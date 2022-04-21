@@ -8,12 +8,16 @@ import citizenData.elements.Citizen;
 import citizenData.elements.Credit;
 import citizenData.id.IdReader;
 import citizenData.id.IdReaderImpl;
+import citizenData.lists.Country;
+import citizenData.lists.PossessionType;
+import citizenData.lists.PunishmentType;
 import database.AccountsDatabase;
 import database.CitizensDatabase;
 import fileOperations.FileExtraction;
 import fileOperations.FileExtractor;
 import login.LoginManager;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class InputOutput implements IO {
@@ -102,7 +106,7 @@ public class InputOutput implements IO {
                 if (user instanceof Bank) {
                     bankEdit(toBeEdited, (Bank) user);
                 } else {
-                    policeEdit();
+                    policeEdit(toBeEdited,(Police) user);
                 }
                 communication.showSuccessfulOperationMessage();
             }
@@ -219,8 +223,31 @@ public class InputOutput implements IO {
         }
     }
 
-    private void policeEdit() {
+    private void policeEdit(Citizen citizen, Police police) {
         communication.showPoliceEditingOptions();
-        //TODO
+
+        switch (scanner.nextLine()){
+            case "1" -> {
+                List<PunishmentType> punishments = null;
+                assert false;
+                punishments.add(communication.getPunishmentType());
+                communication.showSuccessfulOperationMessage();
+                //add crime
+            }
+            case "2" -> {
+                List<PossessionType> possessions = null;
+                assert false;
+                possessions.remove(communication.getPossessionType());
+                communication.showSuccessfulOperationMessage();
+                //Take possession
+            }
+            case "3" -> {
+                List<Country> countries = null;
+                assert false;
+                countries.add(communication.getCountry());
+                communication.showSuccessfulOperationMessage();
+                //Add crossing border
+            }
+        }
     }
 }
