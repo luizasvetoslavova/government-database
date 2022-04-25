@@ -4,7 +4,8 @@ import accounts.bases.Account;
 import accounts.Admin;
 import accounts.Organisation;
 import accounts.bases.User;
-import database.AccountsDatabase;
+import fileOperations.Extraction;
+import fileOperations.Extractor;
 import login.IO.Communication;
 import login.IO.Communicator;
 import login.IO.IO;
@@ -14,19 +15,16 @@ import login.validation.Authenticator;
 
 public class LoginManager {
 
-    private static LoginManager instance;
+    private static final LoginManager instance = new LoginManager();
 
     private final Authentication authentication;
     private final Communication communication;
     private final IO inputOutput;
-    private final AccountsDatabase accountsDatabase;
+    private final Extraction extraction;
 
     private boolean hasLoggedAccount;
 
     public static LoginManager getInstance() {
-        if (instance == null) {
-            instance = new LoginManager();
-        }
         return instance;
     }
 
@@ -34,7 +32,7 @@ public class LoginManager {
         authentication = Authenticator.getInstance();
         communication = Communicator.getInstance();
         inputOutput = InputOutput.getInstance();
-        accountsDatabase = AccountsDatabase.getInstance();
+        extraction = Extractor.getInstance();
     }
 
     public void startLoginProcess() {
@@ -45,7 +43,7 @@ public class LoginManager {
             String email = communication.getEmail();
             authentication.checkInputData(email, communication.getPassword());
 
-            Account logged = accountsDatabase.findBy(email);
+            Account logged = authentication.findByEmail(email);
             hasLoggedAccount = true;
 
             do {

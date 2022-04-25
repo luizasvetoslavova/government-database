@@ -1,10 +1,11 @@
 package accounts.bases;
 
-import database.AccountsDatabase;
+import citizenData.lists.UserPrivacyStatus;
+import fileOperations.FileEditor;
 
-import java.io.Serializable;
+public abstract class Account extends Record {
 
-public abstract class Account extends Record implements Serializable {
+    private static final String fileName = "accounts.database";
 
     private final String email;
     private final String password;
@@ -15,7 +16,7 @@ public abstract class Account extends Record implements Serializable {
         this.email = email;
         this.password = password;
 
-        AccountsDatabase.getInstance().add(this);
+        FileEditor.getInstance().inputObject(fileName, this);
     }
 
     public String getEmail() {

@@ -8,31 +8,24 @@ import citizenData.elements.Citizen;
 import citizenData.elements.Credit;
 import citizenData.id.IdReader;
 import citizenData.id.IdReaderImpl;
-import database.AccountsDatabase;
-import database.CitizensDatabase;
-import fileOperations.FileExtraction;
-import fileOperations.FileExtractor;
+import citizenData.lists.UserPrivacyStatus;
+import fileOperations.Extraction;
+import fileOperations.Extractor;
 import login.LoginManager;
 
 import java.util.Scanner;
 
 public class InputOutput implements IO {
 
-    private static InputOutput instance;
+    private static final InputOutput instance = new InputOutput();
 
     private final Scanner scanner;
     private final Communication communication;
     private final IdReader idReader;
     private final LoginManager loginManager;
-    private final FileExtraction fileExtraction;
-
-    private final CitizensDatabase citizensDatabase;
-    private final AccountsDatabase accountsDatabase;
+    private final Extraction extraction;
 
     public static InputOutput getInstance() {
-        if (instance == null) {
-            instance = new InputOutput();
-        }
         return instance;
     }
 
@@ -40,11 +33,9 @@ public class InputOutput implements IO {
         scanner = new Scanner(System.in);
 
         communication = Communicator.getInstance();
-        fileExtraction = FileExtractor.getInstance();
+        extraction = Extractor.getInstance();
         idReader = IdReaderImpl.getInstance();
         loginManager = LoginManager.getInstance();
-        citizensDatabase = CitizensDatabase.getInstance();
-        accountsDatabase = AccountsDatabase.getInstance();
     }
 
     @Override
@@ -91,10 +82,10 @@ public class InputOutput implements IO {
         switch (scanner.nextLine()) {
             case "1" -> {
                 String id = String.valueOf(communication.getId());
-                if (user instanceof Bank) {
-                    communication.show(fileExtraction.extractBankCitizenData(findCitizen(id)));
+                if (user.getPrivacyStatus() == UserPrivacyStatus.PRIVATE) {
+                    communication.show(extraction.extractPrivateCitizenData(findCitizen(id)));
                 } else {
-                    communication.show(fileExtraction.extractPoliceCitizenData(findCitizen(id)));
+                    communication.show((findCitizen(id).publicDataToString()));
                 }
             }
             case "2" -> {
@@ -107,9 +98,7 @@ public class InputOutput implements IO {
                 communication.showSuccessfulOperationMessage();
             }
 
-            case "3" -> {
-                communication.show(idReader.getIdInfo(communication.getId()));
-            }
+            case "3" -> communication.show(idReader.getIdInfo(communication.getId()));
             case "4" -> {
                 loginManager.logout();
                 communication.showSuccessfulOperationMessage();
@@ -119,7 +108,7 @@ public class InputOutput implements IO {
     }
 
     private Citizen findCitizen(String id) {
-        return citizensDatabase.getDatabase()
+        return extraction.getCitizens()
                 .stream()
                 .filter(citizen -> citizen.getId().equals(id))
                 .findFirst()
@@ -130,14 +119,9 @@ public class InputOutput implements IO {
         communication.showAdminDataAddingOptions();
 
         switch (scanner.nextLine()) {
-            case "1" -> {
-                new Citizen(communication.getName(), String.valueOf(communication.getId()), communication.getAddress());
-                communication.showSuccessfulOperationMessage();
-            }
-            case "2" -> {
-                new Organisation(communication.getName(), communication.getPassword());
-                communication.showSuccessfulOperationMessage();
-            }
+            case "1" -> new Citizen(communication.getName(), String.valueOf(communication.getId()),
+                    communication.getAddress());
+            case "2" -> new Organisation(communication.getEmail(), communication.getPassword());
             case "3" -> {
                 Organisation potentiallyEmpty = askForOrganisation();
                 if (potentiallyEmpty == null) {
@@ -170,7 +154,6 @@ public class InputOutput implements IO {
             }
             default -> communication.showIllegalInputMessage();
         }
-        communication.showSuccessfulOperationMessage();
     }
 
     private Organisation askForOrganisation() {
@@ -178,7 +161,7 @@ public class InputOutput implements IO {
         String email = communication.getEmail();
         String password = communication.getPassword();
 
-        return (Organisation) accountsDatabase.getDatabase()
+        return (Organisation) extraction.getAccounts()
                 .stream()
                 .filter(account -> account instanceof Organisation && account.getEmail().equals(email) &&
                         account.getPassword().equals(password))
@@ -192,7 +175,6 @@ public class InputOutput implements IO {
         switch (scanner.nextLine()) {
             case "1" -> {
                 citizen.getCredits().add(new Credit(citizen, bank, communication.getAmountOfMoney()));
-                communication.showSuccessfulOperationMessage();
             }
             case "2" -> {
                 String id = String.valueOf(communication.getId());
@@ -203,17 +185,15 @@ public class InputOutput implements IO {
                                 .filter(possession -> possession.getId().equals(id))
                                 .findFirst()
                                 .orElse(null));
-                communication.showSuccessfulOperationMessage();
             }
             case "3" -> {
                 double balance = communication.getAmountOfMoney();
-                bank.getDatabase().getDatabase()
+                extraction.getBankClients(bank)
                         .stream()
                         .filter(bankClient -> bankClient.equals(citizen))
                         .findFirst()
                         .orElse(null)
                         .setBalance(balance);
-                communication.showSuccessfulOperationMessage();
             }
             default -> communication.showIllegalInputMessage();
         }

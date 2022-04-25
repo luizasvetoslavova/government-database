@@ -45,6 +45,8 @@ public interface Communication {
 
     void showUserOptions();
 
+    void showUserTypes();
+
     void showOrganisationOptions();
 
     void showAdminDataAddingOptions();

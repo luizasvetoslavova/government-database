@@ -1,19 +1,20 @@
 package accounts.users.bank;
 
 import accounts.bases.User;
-import database.BanksDatabase;
+import citizenData.lists.UserPrivacyStatus;
+import fileOperations.FileEditor;
 
 public class Bank extends User {
 
+    private static final String fileName = "banks.database";
     private static int banksCount;
-
     private final int serialNumber;
+    private final String bankDatabaseName = "bank" + this.getSerialNumber() + ".database";
+
     private final String name;
     private final String address;
     private final String email;
     private final String password;
-
-    private final BankDatabase bankDatabase;
 
     public Bank(String email, String password, String address, String name) {
         super(email, password);
@@ -22,19 +23,19 @@ public class Bank extends User {
 
         this.address = address;
         this.name = name;
+        this.setPrivacyStatus(UserPrivacyStatus.PRIVATE);
 
         banksCount++;
         serialNumber = banksCount;
 
-        BanksDatabase.getInstance().add(this);
-        bankDatabase = new BankDatabase(this);
+        FileEditor.getInstance().inputObject(fileName, this);
+    }
+
+    public String getBankDatabaseName() {
+        return bankDatabaseName;
     }
 
     public int getSerialNumber() {
         return serialNumber;
-    }
-
-    public BankDatabase getDatabase() {
-        return bankDatabase;
     }
 }

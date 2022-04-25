@@ -8,8 +8,8 @@ import java.util.List;
 public class Organisation extends Account {
     List<User> users;
 
-    public Organisation(String username, String password) {
-        super(username, password);
+    public Organisation(String email, String password) {
+        super(email, password);
     }
 
     public void addUser(User user) {

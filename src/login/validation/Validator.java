@@ -10,14 +10,11 @@ import java.util.Date;
 
 public class Validator implements Validation {
 
-    private static Validator instance;
+    private static final Validator instance = new Validator();
 
     private final Communication communication;
 
     public static Validator getInstance() {
-        if (instance == null) {
-            instance = new Validator();
-        }
         return instance;
     }
 
@@ -32,13 +29,13 @@ public class Validator implements Validation {
         try {
             id = Long.parseLong(input);
         } catch (NumberFormatException e) {
-            communication.showIllegalInputMessage();
-            id = communication.getId();
+            Communicator.getInstance().showIllegalInputMessage();
+            id = Communicator.getInstance().getId();
         }
 
         if (String.valueOf(id).length() != 10) {
-            communication.showIllegalInputMessage();
-            id = communication.getId();
+            Communicator.getInstance().showIllegalInputMessage();
+            id = Communicator.getInstance().getId();
         }
         return id;
     }

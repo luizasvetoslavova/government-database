@@ -2,31 +2,27 @@ package fileOperations;
 
 import accounts.bases.Record;
 
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class FileEditor implements FileEditing {
 
-    private static FileEditor instance;
+    private static final FileEditor instance = new FileEditor();
 
     public static FileEditor getInstance() {
-        if (instance == null) {
-            instance = new FileEditor();
-        }
         return instance;
     }
 
     private FileEditor() {
 
     }
-
     @Override
-    public void inputData(String file, Record object) {
-        try {
-            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file, true));
+    public void inputObject(String file, Record object) {
+        try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file, true))) {
             os.writeObject(object);
             os.write("\n".getBytes());
             os.flush();
-            os.close();
 
         } catch (IOException e) {
             e.printStackTrace();

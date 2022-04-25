@@ -1,6 +1,8 @@
 package accounts.bases;
 
-public abstract class Record {
+import java.io.Serializable;
+
+public abstract class Record implements Serializable {
 
     private final String id;
 

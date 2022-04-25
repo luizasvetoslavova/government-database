@@ -12,15 +12,12 @@ import java.util.Scanner;
 
 public class Communicator implements Communication {
 
-    private static Communicator instance;
+    private static final Communicator instance = new Communicator();
 
     private final Validation validation;
     private final Scanner scanner;
 
     public static Communicator getInstance() {
-        if (instance == null) {
-            instance = new Communicator();
-        }
         return instance;
     }
 
@@ -116,31 +113,31 @@ public class Communicator implements Communication {
     }
 
     public double getAmountOfMoney() {
-        System.out.println("Amount of money: ");
+        System.out.print("Amount of money: ");
         return validation.checkAmountOfMoney(scanner.nextLine());
     }
 
     @Override
     public double getPercentage() {
-        System.out.println("Percent: ");
+        System.out.print("Percent: ");
         return validation.checkPercentage(scanner.nextLine());
     }
 
     @Override
     public long getId() {
-        System.out.println("ID: ");
+        System.out.print("ID: ");
         return validation.checkId(scanner.nextLine());
     }
 
     @Override
     public Country getCountry() {
-        System.out.println("Country short record (ex. BG):");
+        System.out.print("Country short record (ex. BG):");
         return validation.checkCountry(scanner.nextLine().toUpperCase());
     }
 
     @Override
     public void showIllegalInputMessage() {
-        System.out.print("Illegal input, please try again: ");
+        System.out.println("Illegal input, please try again: ");
     }
 
     @Override
@@ -152,7 +149,7 @@ public class Communicator implements Communication {
     public void showAdminOptions() {
         System.out.print("You logged as an admin. \n" +
                 "1. Add data \n" +
-                "2. View data for citizen " +
+                "2. View data for citizen \n" +
                 "3. Logout \n" +
                 "Your choice: ");
     }
@@ -161,7 +158,7 @@ public class Communicator implements Communication {
     public void showOrganisationOptions() {
         System.out.print("You logged as an organisation. \n" +
                 "1. Add bank \n" +
-                "2. View all users of yours " +
+                "2. View all users of yours \n" +
                 "3. Logout \n" +
                 "Your choice: ");
     }

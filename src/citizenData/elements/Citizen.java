@@ -3,13 +3,14 @@ package citizenData.elements;
 import accounts.bases.Record;
 import citizenData.id.IdReaderImpl;
 import citizenData.lists.Gender;
-import database.CitizensDatabase;
+import fileOperations.FileEditor;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-public class Citizen extends Record implements Serializable {
+public class Citizen extends Record {
+
+    private static final String fileName = "citizens.database";
 
     private final String name;
     private final String id;
@@ -31,7 +32,7 @@ public class Citizen extends Record implements Serializable {
         this.address = address;
         this.gender = IdReaderImpl.getInstance().getGender(Long.parseLong(id));
 
-        CitizensDatabase.getInstance().add(this);
+        FileEditor.getInstance().inputObject(fileName, this);
     }
 
     public String getId() {
@@ -70,7 +71,7 @@ public class Citizen extends Record implements Serializable {
                 '}';
     }
 
-    public String bankDataToString() {
+    public String privateDataToString() {
         return "Citizen{" +
                 "name='" + name + '\'' +
                 ", id='" + id + '\'' +
@@ -79,7 +80,7 @@ public class Citizen extends Record implements Serializable {
                 ", relatives' credits=";
     }
 
-    public String policeDataToString() {
+    public String publicDataToString() {
         return "Citizen{" +
                 "name='" + name + '\'' +
                 ", id='" + id + '\'' +

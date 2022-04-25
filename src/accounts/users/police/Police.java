@@ -1,6 +1,7 @@
 package accounts.users.police;
 
 import accounts.bases.User;
+import citizenData.lists.UserPrivacyStatus;
 
 public class Police extends User {
     private static Police instance;
@@ -14,5 +15,6 @@ public class Police extends User {
 
     private Police(String email, String password) {
         super(email, password);
+        this.setPrivacyStatus(UserPrivacyStatus.STATE_OWNED);
     }
 }
