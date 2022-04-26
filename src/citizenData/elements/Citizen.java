@@ -64,6 +64,10 @@ public class Citizen extends Record {
         return crossingBorders;
     }
 
+    public List<Crime> getCrimes() {
+        return crimes;
+    }
+
     @Override
     public String toString() {
         return "Citizen{" +

@@ -4,8 +4,6 @@ import accounts.bases.Account;
 import accounts.Admin;
 import accounts.Organisation;
 import accounts.bases.User;
-import fileOperations.Extraction;
-import fileOperations.Extractor;
 import login.IO.Communication;
 import login.IO.Communicator;
 import login.IO.IO;
@@ -20,8 +18,6 @@ public class LoginManager {
     private final Authentication authentication;
     private final Communication communication;
     private final IO inputOutput;
-    private final Extraction extraction;
-
     private boolean hasLoggedAccount;
 
     public static LoginManager getInstance() {
@@ -32,7 +28,6 @@ public class LoginManager {
         authentication = Authenticator.getInstance();
         communication = Communicator.getInstance();
         inputOutput = InputOutput.getInstance();
-        extraction = Extractor.getInstance();
     }
 
     public void startLoginProcess() {
