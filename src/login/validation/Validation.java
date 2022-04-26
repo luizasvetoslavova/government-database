@@ -5,6 +5,13 @@ import citizenData.lists.Country;
 import java.util.Date;
 
 public interface Validation {
+    String checkEmail(String email);
+
+    String checkPassword(String password);
+
+    String checkName(String name);
+
+    String checkAddress(String address);
 
     long checkId(String input);
 

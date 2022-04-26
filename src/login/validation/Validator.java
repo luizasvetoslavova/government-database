@@ -23,6 +23,42 @@ public class Validator implements Validation {
     }
 
     @Override
+    public String checkEmail(String email) {
+        if (isEmpty(email) || !email.matches("^[\\w!#$%&’+/=?`{|}~^-]+(?:\\.[\\w!#$%&’+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")){
+            communication.showIllegalInputMessage();
+            email = communication.getEmail();
+        }
+        return email;
+    }
+
+    @Override
+    public String checkPassword(String password) {
+        if(isEmpty(password) || password.length() > 8){
+            communication.showIllegalInputMessage();
+            password = communication.getPassword();
+        }
+        return password;
+    }
+
+    @Override
+    public String checkName(String name) {
+        if (isEmpty(name)){
+            communication.showIllegalInputMessage();
+            name = communication.getName();
+        }
+        return name;
+    }
+
+    @Override
+    public String checkAddress(String address) {
+        if (isEmpty(address)){
+            communication.showIllegalInputMessage();
+            address = communication.getAddress();
+        }
+        return address;
+    }
+
+    @Override
     public long checkId(String input) {
         long id;
 
@@ -33,7 +69,7 @@ public class Validator implements Validation {
             id = Communicator.getInstance().getId();
         }
 
-        if (String.valueOf(id).length() != 10) {
+        if (isEmpty(input)) {
             Communicator.getInstance().showIllegalInputMessage();
             id = Communicator.getInstance().getId();
         }
@@ -50,6 +86,11 @@ public class Validator implements Validation {
             communication.showIllegalInputMessage();
             date = communication.getDate();
         }
+
+        if(isEmpty(input)){
+            communication.showIllegalInputMessage();
+            date = communication.getDate();
+        }
         return date;
     }
 
@@ -63,6 +104,12 @@ public class Validator implements Validation {
             communication.showIllegalInputMessage();
             amount = communication.getAmountOfMoney();
         }
+
+        if(isEmpty(input)){
+            communication.showIllegalInputMessage();
+            amount = communication.getAmountOfMoney();
+        }
+
         return amount;
     }
 
@@ -73,6 +120,11 @@ public class Validator implements Validation {
         try {
             percent = Double.parseDouble(input);
         } catch (NumberFormatException e) {
+            communication.showIllegalInputMessage();
+            percent = communication.getPercentage();
+        }
+
+        if(isEmpty(input)){
             communication.showIllegalInputMessage();
             percent = communication.getPercentage();
         }
@@ -89,6 +141,15 @@ public class Validator implements Validation {
             communication.showIllegalInputMessage();
             country = communication.getCountry();
         }
+
+        if(isEmpty(input)){
+            communication.showIllegalInputMessage();
+            country = communication.getCountry();
+        }
         return country;
+    }
+
+    public boolean isEmpty(String input){
+        return input == null || input.isBlank();
     }
 }
