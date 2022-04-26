@@ -87,22 +87,10 @@ public class InputOutput implements IO {
 
         switch (scanner.nextLine()) {
             case "1" -> {
-                String id = String.valueOf(communication.getId());
-                if (user.getPrivacyStatus() == UserPrivacyStatus.PRIVATE) {
-                    communication.show(extraction.extractPrivateCitizenData(findCitizen(id)));
-                } else {
-                    communication.show((findCitizen(id).publicDataToString()));
-                }
+                viewData(user);
             }
             case "2" -> {
-                Citizen toBeEdited = findCitizen(String.valueOf(communication.getId()));
-                if (user instanceof Bank) {
-                    bankEdit(toBeEdited, (Bank) user);
-                } else {
-                    policeEdit(toBeEdited, (Police) user);
-                    communication.showSuccessfulOperationMessage();
-                }
-                communication.showSuccessfulOperationMessage();
+                editData(user);
             }
 
             case "3" -> communication.show(idReader.getIdInfo(communication.getId()));
@@ -114,6 +102,25 @@ public class InputOutput implements IO {
         }
     }
 
+    public void viewData(User user){
+        String id = String.valueOf(communication.getId());
+        if (user.getPrivacyStatus() == UserPrivacyStatus.PRIVATE) {
+            communication.show(extraction.extractPrivateCitizenData(findCitizen(id)));
+        } else {
+            communication.show((findCitizen(id).publicDataToString()));
+        }
+    }
+
+    public void editData(User user){
+        Citizen toBeEdited = findCitizen(String.valueOf(communication.getId()));
+        if (user instanceof Bank) {
+            bankEdit(toBeEdited, (Bank) user);
+        } else {
+            policeEdit(toBeEdited, (Police) user);
+            communication.showSuccessfulOperationMessage();
+        }
+        communication.showSuccessfulOperationMessage();
+    }
     private Citizen findCitizen(String id) {
         return extraction.getCitizens()
                 .stream()
@@ -130,21 +137,26 @@ public class InputOutput implements IO {
                     communication.getAddress());
             case "2" -> new Organisation(communication.getEmail(), communication.getPassword());
             case "3" -> {
-                Organisation potentiallyEmpty = askForOrganisation();
-                if (potentiallyEmpty == null) {
-                    communication.showIllegalInputMessage();
-                    return;
-                }
-                if (potentiallyEmpty.getUsers().get(0) == null) {
-                    addUser(potentiallyEmpty);
-
-                } else {
-                    communication.showAlreadyExistingUserMessage();
-                }
+                viewFirstOrganisationUser();
             }
             default -> communication.showIllegalInputMessage();
         }
     }
+
+    public void viewFirstOrganisationUser(){
+        Organisation potentiallyEmpty = askForOrganisation();
+        if (potentiallyEmpty == null) {
+            communication.showIllegalInputMessage();
+            return;
+        }
+        if (potentiallyEmpty.getUsers().get(0) == null) {
+            addUser(potentiallyEmpty);
+
+        } else {
+            communication.showAlreadyExistingUserMessage();
+        }
+    }
+
 
     private void addUser(Organisation organisation) {
         communication.showUserTypes();
