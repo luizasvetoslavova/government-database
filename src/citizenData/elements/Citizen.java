@@ -6,6 +6,7 @@ import citizenData.lists.Gender;
 import fileOperations.FileEditor;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Citizen extends Record {
@@ -18,7 +19,7 @@ public class Citizen extends Record {
     private Gender gender;
 
     private List<Crime> crimes;
-    private List<Possession> possessions;
+    private Map<Long, Possession> possessions;
     private List<CrossingBorder> crossingBorders;
     private List<Credit> credits;
 
@@ -39,7 +40,7 @@ public class Citizen extends Record {
         return id;
     }
 
-    public List<Possession> getPossessions() {
+    public Map<Long, Possession> getPossessions() {
         return possessions;
     }
 
@@ -53,6 +54,14 @@ public class Citizen extends Record {
 
     public Gender getGender() {
         return gender;
+    }
+
+    public List<Crime> getCrimes() {
+        return crimes;
+    }
+
+    public List<CrossingBorder> getCrossingBorders() {
+        return crossingBorders;
     }
 
     @Override

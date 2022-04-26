@@ -6,6 +6,8 @@ import accounts.users.bank.Bank;
 import accounts.users.police.Police;
 import citizenData.elements.Citizen;
 import citizenData.elements.Credit;
+import citizenData.elements.Crime;
+import citizenData.elements.CrossingBorder;
 import citizenData.id.IdReader;
 import citizenData.id.IdReaderImpl;
 import citizenData.lists.Country;
@@ -98,7 +100,7 @@ public class InputOutput implements IO {
                     bankEdit(toBeEdited, (Bank) user);
                 } else {
                     policeEdit(toBeEdited, (Police) user);
-                    ;
+                    communication.showSuccessfulOperationMessage();
                 }
                 communication.showSuccessfulOperationMessage();
             }
@@ -186,8 +188,9 @@ public class InputOutput implements IO {
 
                 citizen.getPossessions().remove(
                         citizen.getPossessions()
+                                .entrySet()
                                 .stream()
-                                .filter(possession -> possession.getId().equals(id))
+                                .filter(possession -> possession.getValue().getId().equals(id))
                                 .findFirst()
                                 .orElse(null));
             }
@@ -207,26 +210,12 @@ public class InputOutput implements IO {
     private void policeEdit(Citizen citizen, Police police) {
         communication.showPoliceEditingOptions();
         switch (scanner.nextLine()) {
-            case "1" -> {
-                List<PunishmentType> punishments = null;
-                assert false;
-                punishments.add(communication.getPunishmentType());
-                communication.showSuccessfulOperationMessage();
-                //add crime
-            }
-            case "2" -> {
-                List<PossessionType> possessions = null;
-                assert false;
-                possessions.remove(communication.getPossessionType());
-                communication.showSuccessfulOperationMessage();
-                //Take possession
-            }
+            case "1" -> citizen.getCrimes().add(new Crime(findCitizen(String.valueOf(communication.getId())),
+                    communication.getDate(), communication.getPunishmentType()));
+            case "2" -> citizen.getPossessions().remove(communication.getId());
             case "3" -> {
-                List<Country> countries = null;
-                assert false;
-                countries.add(communication.getCountry());
-                communication.showSuccessfulOperationMessage();
-                //Add crossing border
+                citizen.getCrossingBorders().add(new CrossingBorder(findCitizen(String.valueOf(communication.getId())),
+                        communication.getDate(), communication.getCountry()));
             }
         }
     }
