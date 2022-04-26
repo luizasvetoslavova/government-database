@@ -13,7 +13,7 @@ import java.util.Set;
 public class Extractor implements Extraction {
 
     private static final String citizensFile = "citizens.database";
-    private static final String accountsFile = "citizens.database";
+    private static final String accountsFile = "accounts.database";
 
     private static final Extractor instance = new Extractor();
 
@@ -31,50 +31,45 @@ public class Extractor implements Extraction {
 
     @Override
     public Set<Citizen> getCitizens() {
-        Set<Citizen> result = new HashSet<>();
-        Arrays.stream(extractWholeData(citizensFile).split("\r\n"))
-                .forEach(citizen -> result.add((Citizen) convertObject(citizen)));
-
-        return result;
+        return getObjects(citizensFile);
     }
 
     @Override
     public Set<Account> getAccounts() {
-        Set<Account> result = new HashSet<>();
-        Arrays.stream(extractWholeData(accountsFile).split("\r\n"))
-                .forEach(account -> result.add((Account) convertObject(account)));
-
-        return result;
+        return getObjects(accountsFile);
     }
 
     @Override
     public Set<BankClient> getBankClients(Bank bank) {
-        Set<BankClient> result = new HashSet<>();
-        Arrays.stream(extractWholeData(bank.getBankDatabaseName()).split("\r\n"))
-                .forEach(client -> result.add((BankClient) convertObject(client)));
+        return getObjects(bank.getBankDatabaseName());
+    }
 
+    private <T> Set<T> getObjects(String file) {
+        Set<T> result = new HashSet<>();
+        Arrays.stream(extractWholeData(file).split("\r\n\r\n\r\n"))
+                .forEach(element -> result.add((T) element));
         return result;
     }
 
-    private Object convertObject(String element) {
-        Object obj = null;
-
-        try (ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(element))) {
-            obj = objectIn.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return obj;
-    }
+//    private <T> T convertObject(String element) {
+//        T elementAsObject = null;
+//
+//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(element))) {
+//            elementAsObject = (T) ois.readObject();
+//        } catch (IOException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//        return elementAsObject;
+//    }
 
     private String extractWholeData(String file) {
         StringBuilder sb = new StringBuilder();
 
-        try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(file))) {
-            while (is.readObject() != null) {
-                sb.append(is.readObject());
+        try (ByteArrayInputStream is = new ByteArrayInputStream(file.getBytes())) {
+            while (is.read() == -1) {
+                sb.append(is.read());
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return sb.toString();

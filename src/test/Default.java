@@ -1,3 +1,5 @@
+package test;
+
 import accounts.Admin;
 import accounts.Organisation;
 import accounts.users.bank.Bank;

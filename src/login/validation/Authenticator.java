@@ -6,13 +6,14 @@ import fileOperations.Extractor;
 import login.IO.Communication;
 import login.IO.Communicator;
 
-public class Authenticator implements Authentication {
+import java.util.stream.Collectors;
 
-    private final Extraction extraction;
+public class Authenticator implements Authentication {
 
     private static final Authenticator instance = new Authenticator();
 
     private final Communication communication;
+    private final Extraction extraction;
 
     public static Authenticator getInstance() {
         return instance;
@@ -37,11 +38,11 @@ public class Authenticator implements Authentication {
         return extraction.getAccounts()
                 .stream()
                 .filter(account -> account.getEmail().equals(email))
-                .findFirst()
+                .findAny()
                 .orElse(null);
     }
 
-    public boolean isDataCorrect(String email, String password) {
+    private boolean isDataCorrect(String email, String password) {
         return extraction.getAccounts()
                 .stream()
                 .anyMatch(account -> account.getEmail().equals(email) && account.getPassword().equals(password));

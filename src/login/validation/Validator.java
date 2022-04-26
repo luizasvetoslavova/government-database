@@ -58,6 +58,27 @@ public class Validator implements Validation {
         return address;
     }
 
+
+    @Override
+    public String checkEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public String checkPassword(String password) {
+        return null;
+    }
+
+    @Override
+    public String checkName(String name) {
+        return null;
+    }
+
+    @Override
+    public String checkAddress(String address) {
+        return null;
+    }
+
     @Override
     public long checkId(String input) {
         long id;
@@ -65,13 +86,13 @@ public class Validator implements Validation {
         try {
             id = Long.parseLong(input);
         } catch (NumberFormatException e) {
-            Communicator.getInstance().showIllegalInputMessage();
-            id = Communicator.getInstance().getId();
+            communication.showIllegalInputMessage();
+            id = communication.getId();
         }
 
         if (isEmpty(input)) {
-            Communicator.getInstance().showIllegalInputMessage();
-            id = Communicator.getInstance().getId();
+            communication.showIllegalInputMessage();
+            id = communication.getId();
         }
         return id;
     }
@@ -88,6 +109,11 @@ public class Validator implements Validation {
         }
 
         if(isEmpty(input)){
+            communication.showIllegalInputMessage();
+            date = communication.getDate();
+        }
+
+        if (date == null) {
             communication.showIllegalInputMessage();
             date = communication.getDate();
         }

@@ -17,11 +17,12 @@ public class FileEditor implements FileEditing {
     private FileEditor() {
 
     }
+
     @Override
     public void inputObject(String file, Record object) {
         try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(file, true))) {
             os.writeObject(object);
-            os.write("\n".getBytes());
+            os.write("\r\n\r\n\r\n".getBytes());
             os.flush();
 
         } catch (IOException e) {
