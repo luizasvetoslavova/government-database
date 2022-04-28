@@ -46,17 +46,22 @@ public class Extractor implements Extraction {
 
     private <T> Set<T> getObjects(String file) {
         Set<T> result = new HashSet<>();
+
         Arrays.stream(extractWholeData(file).split("\r\n\r\n\r\n"))
                 .forEach(element -> result.add(convertObject(file, element)));
         return result;
     }
 
+    /* TODO make convertObject read not just the first, but all of the objects in the file(in order getObjects to work)
+         OR make getObjects change the copy of the file while iterating(in order convertObject to work) */
     @SuppressWarnings("unchecked")
     private <T> T convertObject(String file, String element) {
         T elementAsObject = null;
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            elementAsObject = (T) ois.readObject();
+            if (file.contains(element)) {
+                elementAsObject = (T) ois.readObject();
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

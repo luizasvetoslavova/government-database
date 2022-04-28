@@ -19,6 +19,7 @@ import fileOperations.Extractor;
 import login.LoginManager;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class InputOutput implements IO {
@@ -48,7 +49,13 @@ public class InputOutput implements IO {
 
         switch (scanner.nextLine()) {
             case "1" -> addData();
-            case "2" -> communication.show(findCitizen(String.valueOf(communication.getId())).toString());
+            case "2" -> {
+                if (findCitizen(String.valueOf(communication.getId())) != null) {
+                    communication.show(findCitizen(String.valueOf(communication.getId())).toString());
+                } else {
+                    communication.showNotFoundMessage();
+                }
+            }
             case "3" -> {
                 LoginManager.getInstance().logout();
                 communication.showSuccessfulOperationMessage();
@@ -83,7 +90,13 @@ public class InputOutput implements IO {
         switch (scanner.nextLine()) {
             case "1" -> viewData(user);
             case "2" -> editData(user);
-            case "3" -> communication.show(idReader.getIdInfo(communication.getId()));
+            case "3" -> {
+                if (idReader.getIdInfo(communication.getId()) != null) {
+                    communication.show(idReader.getIdInfo(communication.getId()));
+                } else {
+                    communication.showNotFoundMessage();
+                }
+            }
             case "4" -> {
                 LoginManager.getInstance().logout();
                 communication.showSuccessfulOperationMessage();
@@ -92,16 +105,20 @@ public class InputOutput implements IO {
         }
     }
 
-    public void viewData(User user) {
+    private void viewData(User user) {
         String id = String.valueOf(communication.getId());
-        if (user.getPrivacyStatus() == UserPrivacyStatus.PRIVATE) {
-            communication.show(extraction.extractPrivateCitizenData(findCitizen(id)));
+        if (findCitizen(id) != null) {
+            if (user.getPrivacyStatus() == UserPrivacyStatus.PRIVATE) {
+                communication.show(extraction.extractPrivateCitizenData(findCitizen(id)));
+            } else {
+                communication.show((findCitizen(id).publicDataToString()));
+            }
         } else {
-            communication.show((findCitizen(id).publicDataToString()));
+            communication.showNotFoundMessage();
         }
     }
 
-    public void editData(User user) {
+    private void editData(User user) {
         Citizen toBeEdited = findCitizen(String.valueOf(communication.getId()));
         if (user instanceof Bank) {
             bankEdit(toBeEdited, (Bank) user);
@@ -138,10 +155,10 @@ public class InputOutput implements IO {
         }
     }
 
-    public void addFirstOrganisationUser() {
+    private void addFirstOrganisationUser() {
         Organisation potentiallyEmpty = askForOrganisation();
         if (potentiallyEmpty == null) {
-            communication.show("Organisation does not exist.");
+            communication.showNotFoundMessage();
         }
         if (potentiallyEmpty.getUsers().get(0) == null) {
             addUser(potentiallyEmpty);
@@ -200,11 +217,11 @@ public class InputOutput implements IO {
             }
             case "3" -> {
                 double balance = communication.getAmountOfMoney();
-                extraction.getBankClients(bank)
-                        .stream()
-                        .filter(bankClient -> bankClient.equals(citizen))
-                        .findFirst()
-                        .orElse(null)
+                Objects.requireNonNull(extraction.getBankClients(bank)
+                                .stream()
+                                .filter(bankClient -> bankClient.equals(citizen))
+                                .findFirst()
+                                .orElse(null))
                         .setBalance(balance);
             }
             default -> communication.showIllegalInputMessage();

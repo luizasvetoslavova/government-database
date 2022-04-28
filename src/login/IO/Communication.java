@@ -56,4 +56,6 @@ public interface Communication {
     void showBankEditingOptions();
 
     void showPoliceEditingOptions();
+
+    void showNotFoundMessage();
 }

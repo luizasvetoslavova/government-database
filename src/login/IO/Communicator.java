@@ -205,6 +205,11 @@ public class Communicator implements Communication {
     }
 
     @Override
+    public void showNotFoundMessage() {
+        System.out.println("Nothing found here.");
+    }
+
+    @Override
     public void welcome() {
         System.out.println("Welcome to the government interactive database! \n");
     }
