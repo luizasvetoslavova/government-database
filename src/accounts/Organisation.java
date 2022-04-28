@@ -3,6 +3,8 @@ package accounts;
 import accounts.bases.Account;
 import accounts.bases.User;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Organisation extends Account {
@@ -10,6 +12,7 @@ public class Organisation extends Account {
 
     public Organisation(String email, String password) {
         super(email, password);
+        users = new ArrayList<>();
     }
 
     public void addUser(User user) {

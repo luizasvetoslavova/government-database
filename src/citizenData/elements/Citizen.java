@@ -5,9 +5,7 @@ import citizenData.id.IdReaderImpl;
 import citizenData.lists.Gender;
 import fileOperations.FileEditor;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Citizen extends Record {
 
@@ -34,6 +32,13 @@ public class Citizen extends Record {
         this.gender = IdReaderImpl.getInstance().getGender(Long.parseLong(id));
 
         FileEditor.getInstance().inputObject(fileName, this);
+
+        crimes = new ArrayList<>();
+        possessions = new HashMap<>();
+        crossingBorders = new ArrayList<>();
+        credits = new ArrayList<>();
+        relatives = new HashSet<>();
+        companies = new HashSet<>();
     }
 
     public String getId() {
@@ -62,10 +67,6 @@ public class Citizen extends Record {
 
     public List<CrossingBorder> getCrossingBorders() {
         return crossingBorders;
-    }
-
-    public List<Crime> getCrimes() {
-        return crimes;
     }
 
     @Override

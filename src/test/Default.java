@@ -9,8 +9,8 @@ import citizenData.elements.Citizen;
 public class Default {
 
     public void insertStartupData() {
-        insertDefaultAccounts();
         insertDefaultCitizens();
+        insertDefaultAccounts();
     }
 
     private void insertDefaultCitizens() {
@@ -26,9 +26,14 @@ public class Default {
 
     private void insertDefaultAccounts() {
         new Admin("admin@abv.bg", "admin123");
-        new Organisation("org@gmail.com", "org123");
-        Bank b1 = new Bank("obb@abv.bg", "1111", "Vratsa, ul. Polkovnik Lukashov 2", "OBB");
-        Bank b2 = new Bank("dsk@gmail.com", "1234", "Vratsa, ul. Hristo Botev 44", "DSK");
+
+        Bank b1 = new Bank("obb@abv.bg", "11111111", "Vratsa, ul. Polkovnik Lukashov 2", "OBB");
+        Bank b2 = new Bank("dsk@gmail.com", "12345678", "Vratsa, ul. Hristo Botev 44", "DSK");
+
+        Organisation o1 = new Organisation("org@gmail.com", "org12345");
+        o1.getUsers().add(b1);
+        o1.getUsers().add(b2);
+
         new BankClient("Angel Kirilov Maldzhanski", "0546061779", "Vratsa, ul. Todor " +
                 "Zhivkov 6", b1);
         new BankClient("Luiza Valerieva Svetoslavova", "0583424739", "Mezdra, ul. " +

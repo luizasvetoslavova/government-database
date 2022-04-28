@@ -28,7 +28,6 @@ public class InputOutput implements IO {
     private final Scanner scanner;
     private final Communication communication;
     private final IdReader idReader;
-    private final LoginManager loginManager;
     private final Extraction extraction;
 
     public static InputOutput getInstance() {
@@ -41,7 +40,6 @@ public class InputOutput implements IO {
         communication = Communicator.getInstance();
         extraction = Extractor.getInstance();
         idReader = IdReaderImpl.getInstance();
-        loginManager = LoginManager.getInstance();
     }
 
     @Override
@@ -49,13 +47,10 @@ public class InputOutput implements IO {
         communication.showAdminOptions();
 
         switch (scanner.nextLine()) {
-            case "1" -> {
-                addData();
-                communication.showSuccessfulOperationMessage();
-            }
+            case "1" -> addData();
             case "2" -> communication.show(findCitizen(String.valueOf(communication.getId())).toString());
             case "3" -> {
-                loginManager.logout();
+                LoginManager.getInstance().logout();
                 communication.showSuccessfulOperationMessage();
             }
             default -> communication.showIllegalInputMessage();
@@ -74,7 +69,7 @@ public class InputOutput implements IO {
             }
             case "2" -> organisation.getUsers().forEach(user -> communication.show(user.toString().concat("\n")));
             case "3" -> {
-                loginManager.logout();
+                LoginManager.getInstance().logout();
                 communication.showSuccessfulOperationMessage();
             }
             default -> communication.showIllegalInputMessage();
@@ -86,23 +81,18 @@ public class InputOutput implements IO {
         communication.showUserOptions();
 
         switch (scanner.nextLine()) {
-            case "1" -> {
-                viewData(user);
-            }
-            case "2" -> {
-                editData(user);
-            }
-
+            case "1" -> viewData(user);
+            case "2" -> editData(user);
             case "3" -> communication.show(idReader.getIdInfo(communication.getId()));
             case "4" -> {
-                loginManager.logout();
+                LoginManager.getInstance().logout();
                 communication.showSuccessfulOperationMessage();
             }
             default -> communication.showIllegalInputMessage();
         }
     }
 
-    public void viewData(User user){
+    public void viewData(User user) {
         String id = String.valueOf(communication.getId());
         if (user.getPrivacyStatus() == UserPrivacyStatus.PRIVATE) {
             communication.show(extraction.extractPrivateCitizenData(findCitizen(id)));
@@ -111,7 +101,7 @@ public class InputOutput implements IO {
         }
     }
 
-    public void editData(User user){
+    public void editData(User user) {
         Citizen toBeEdited = findCitizen(String.valueOf(communication.getId()));
         if (user instanceof Bank) {
             bankEdit(toBeEdited, (Bank) user);
@@ -121,6 +111,7 @@ public class InputOutput implements IO {
         }
         communication.showSuccessfulOperationMessage();
     }
+
     private Citizen findCitizen(String id) {
         return extraction.getCitizens()
                 .stream()
@@ -133,25 +124,28 @@ public class InputOutput implements IO {
         communication.showAdminDataAddingOptions();
 
         switch (scanner.nextLine()) {
-            case "1" -> new Citizen(communication.getName(), String.valueOf(communication.getId()),
-                    communication.getAddress());
-            case "2" -> new Organisation(communication.getEmail(), communication.getPassword());
-            case "3" -> {
-                viewFirstOrganisationUser();
+            case "1" -> {
+                new Citizen(communication.getName(), String.valueOf(communication.getId()),
+                        communication.getAddress());
+                communication.showSuccessfulOperationMessage();
             }
+            case "2" -> {
+                new Organisation(communication.getEmail(), communication.getPassword());
+                communication.showSuccessfulOperationMessage();
+            }
+            case "3" -> addFirstOrganisationUser();
             default -> communication.showIllegalInputMessage();
         }
     }
 
-    public void viewFirstOrganisationUser(){
+    public void addFirstOrganisationUser() {
         Organisation potentiallyEmpty = askForOrganisation();
         if (potentiallyEmpty == null) {
-            communication.showIllegalInputMessage();
-            return;
+            communication.show("Organisation does not exist.");
         }
         if (potentiallyEmpty.getUsers().get(0) == null) {
             addUser(potentiallyEmpty);
-
+            communication.showSuccessfulOperationMessage();
         } else {
             communication.showAlreadyExistingUserMessage();
         }
@@ -178,12 +172,10 @@ public class InputOutput implements IO {
     private Organisation askForOrganisation() {
         communication.show("Organisation: \n");
         String email = communication.getEmail();
-        String password = communication.getPassword();
 
         return (Organisation) extraction.getAccounts()
                 .stream()
-                .filter(account -> account instanceof Organisation && account.getEmail().equals(email) &&
-                        account.getPassword().equals(password))
+                .filter(account -> account instanceof Organisation && account.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
     }

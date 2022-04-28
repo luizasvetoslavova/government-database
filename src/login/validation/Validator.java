@@ -12,30 +12,28 @@ public class Validator implements Validation {
 
     private static final Validator instance = new Validator();
 
-    private final Communication communication;
-
     public static Validator getInstance() {
         return instance;
     }
 
     private Validator() {
-        communication = Communicator.getInstance();
+
     }
 
     @Override
     public String checkEmail(String email) {
         if (isEmpty(email) || !email.matches("^[\\w!#$%&’+/=?`{|}~^-]+(?:\\.[\\w!#$%&’+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")){
-            communication.showIllegalInputMessage();
-            email = communication.getEmail();
+            Communicator.getInstance().showIllegalInputMessage();
+            email = Communicator.getInstance().getEmail();
         }
         return email;
     }
 
     @Override
     public String checkPassword(String password) {
-        if(isEmpty(password) || password.length() > 8){
-            communication.showIllegalInputMessage();
-            password = communication.getPassword();
+        if(isEmpty(password) || password.length() < 8){
+            Communicator.getInstance().showIllegalInputMessage();
+            password = Communicator.getInstance().getPassword();
         }
         return password;
     }
@@ -43,8 +41,8 @@ public class Validator implements Validation {
     @Override
     public String checkName(String name) {
         if (isEmpty(name)){
-            communication.showIllegalInputMessage();
-            name = communication.getName();
+            Communicator.getInstance().showIllegalInputMessage();
+            name = Communicator.getInstance().getName();
         }
         return name;
     }
@@ -52,31 +50,10 @@ public class Validator implements Validation {
     @Override
     public String checkAddress(String address) {
         if (isEmpty(address)){
-            communication.showIllegalInputMessage();
-            address = communication.getAddress();
+            Communicator.getInstance().showIllegalInputMessage();
+            address = Communicator.getInstance().getAddress();
         }
         return address;
-    }
-
-
-    @Override
-    public String checkEmail(String email) {
-        return null;
-    }
-
-    @Override
-    public String checkPassword(String password) {
-        return null;
-    }
-
-    @Override
-    public String checkName(String name) {
-        return null;
-    }
-
-    @Override
-    public String checkAddress(String address) {
-        return null;
     }
 
     @Override
@@ -86,13 +63,13 @@ public class Validator implements Validation {
         try {
             id = Long.parseLong(input);
         } catch (NumberFormatException e) {
-            communication.showIllegalInputMessage();
-            id = communication.getId();
+            Communicator.getInstance().showIllegalInputMessage();
+            id = Communicator.getInstance().getId();
         }
 
         if (isEmpty(input)) {
-            communication.showIllegalInputMessage();
-            id = communication.getId();
+            Communicator.getInstance().showIllegalInputMessage();
+            id = Communicator.getInstance().getId();
         }
         return id;
     }
@@ -104,18 +81,18 @@ public class Validator implements Validation {
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(input);
         } catch (ParseException e) {
-            communication.showIllegalInputMessage();
-            date = communication.getDate();
+            Communicator.getInstance().showIllegalInputMessage();
+            date = Communicator.getInstance().getDate();
         }
 
         if(isEmpty(input)){
-            communication.showIllegalInputMessage();
-            date = communication.getDate();
+            Communicator.getInstance().showIllegalInputMessage();
+            date = Communicator.getInstance().getDate();
         }
 
         if (date == null) {
-            communication.showIllegalInputMessage();
-            date = communication.getDate();
+            Communicator.getInstance().showIllegalInputMessage();
+            date = Communicator.getInstance().getDate();
         }
         return date;
     }
@@ -127,13 +104,13 @@ public class Validator implements Validation {
         try {
             amount = Double.parseDouble(input);
         } catch (NumberFormatException e) {
-            communication.showIllegalInputMessage();
-            amount = communication.getAmountOfMoney();
+            Communicator.getInstance().showIllegalInputMessage();
+            amount = Communicator.getInstance().getAmountOfMoney();
         }
 
         if(isEmpty(input)){
-            communication.showIllegalInputMessage();
-            amount = communication.getAmountOfMoney();
+            Communicator.getInstance().showIllegalInputMessage();
+            amount = Communicator.getInstance().getAmountOfMoney();
         }
 
         return amount;
@@ -146,13 +123,13 @@ public class Validator implements Validation {
         try {
             percent = Double.parseDouble(input);
         } catch (NumberFormatException e) {
-            communication.showIllegalInputMessage();
-            percent = communication.getPercentage();
+            Communicator.getInstance().showIllegalInputMessage();
+            percent = Communicator.getInstance().getPercentage();
         }
 
         if(isEmpty(input)){
-            communication.showIllegalInputMessage();
-            percent = communication.getPercentage();
+            Communicator.getInstance().showIllegalInputMessage();
+            percent = Communicator.getInstance().getPercentage();
         }
         return percent / 100;
     }
@@ -164,13 +141,13 @@ public class Validator implements Validation {
         try {
             country = Country.valueOf(input);
         } catch (IllegalArgumentException e) {
-            communication.showIllegalInputMessage();
-            country = communication.getCountry();
+            Communicator.getInstance().showIllegalInputMessage();
+            country = Communicator.getInstance().getCountry();
         }
 
         if(isEmpty(input)){
-            communication.showIllegalInputMessage();
-            country = communication.getCountry();
+            Communicator.getInstance().showIllegalInputMessage();
+            country = Communicator.getInstance().getCountry();
         }
         return country;
     }

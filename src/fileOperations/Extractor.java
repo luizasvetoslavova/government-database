@@ -47,20 +47,21 @@ public class Extractor implements Extraction {
     private <T> Set<T> getObjects(String file) {
         Set<T> result = new HashSet<>();
         Arrays.stream(extractWholeData(file).split("\r\n\r\n\r\n"))
-                .forEach(element -> result.add((T) element));
+                .forEach(element -> result.add(convertObject(file, element)));
         return result;
     }
 
-//    private <T> T convertObject(String element) {
-//        T elementAsObject = null;
-//
-//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(element))) {
-//            elementAsObject = (T) ois.readObject();
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//        return elementAsObject;
-//    }
+    @SuppressWarnings("unchecked")
+    private <T> T convertObject(String file, String element) {
+        T elementAsObject = null;
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            elementAsObject = (T) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return elementAsObject;
+    }
 
     private String extractWholeData(String file) {
         StringBuilder sb = new StringBuilder();

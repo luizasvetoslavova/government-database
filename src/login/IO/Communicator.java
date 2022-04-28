@@ -29,25 +29,25 @@ public class Communicator implements Communication {
     @Override
     public String getEmail() {
         System.out.print("E-mail: ");
-        return scanner.nextLine();
+        return validation.checkEmail(scanner.nextLine());
     }
 
     @Override
     public String getPassword() {
         System.out.print("Password: ");
-        return scanner.nextLine();
+        return validation.checkPassword(scanner.nextLine());
     }
 
     @Override
     public String getName() {
         System.out.print("Name: ");
-        return scanner.nextLine();
+        return validation.checkName(scanner.nextLine());
     }
 
     @Override
     public String getAddress() {
         System.out.print("Address: ");
-        return scanner.nextLine();
+        return validation.checkAddress(scanner.nextLine());
     }
 
     @Override

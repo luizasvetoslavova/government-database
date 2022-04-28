@@ -13,14 +13,6 @@ public interface Validation {
 
     String checkAddress(String address);
 
-    String checkEmail(String email);
-
-    String checkPassword(String password);
-
-    String checkName(String name);
-
-    String checkAddress(String address);
-
     long checkId(String input);
 
     Date checkDate(String input);
