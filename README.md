@@ -1,73 +1,73 @@
-Държавна база данни
+Governmant database
 --------------------
 
-Интерактивната система за съхранение и въвеждане на данни позволява логване на админ, организация или потребител от държавна/частна институция и извършване на поверителни/публични операции от нейна страна.
+The interactive data storage and entry system allows login for an admin, organization or a user from a government/private institution and performing confidential/public operations on its part.
 
-Потребителите на различните институции взаимодействат както с админа на база данни, така и помежду си. Всички данни се запазват във файлове, така че да няма загуба на информация при спиране на системата.
+The users of the different institutions interact both with the database administrator and with each other. All data is saved in files so that there is no loss of information in the event of a system shutdown.
 
-    В базата данни, всеки гражданин има:
-- ЕГН, от което програмата извлича рождена дата, област на раждане, пол
-- Име
-- Постоянен адрес
-- Наказания
-- Притежания (коли, имоти и т.н)
-- Излизане извън граница
-- Роднини
-- Фирми
-- Кредитно досие
+     In the database, every citizen has:
+- SSN (id), from which the program extracts date of birth, region of birth and gender
+- A name
+- Permanent address
+- Penalties
+- Possessions (cars, properties, etc)
+- Entry/exit border registrations
+- Relatives
+- Companies owned
+- Credit files
 
-Системата има 3 типа акаунт:
+The system has 3 account types:
 --------------------
 
-    1) Админ (държи под контрол всички държавни институции):
-- Въвежда нови граждани
-- Има достъп до цялата информация за всеки гражданин по всяко време
-- Създава организации и назначава първия им потребител
+     1) Admin (keeps all state institutions under control):
+- Adds new citizens
+- Has access to all the information about every citizen at any time
+- Creates organizations and assigns their first user
 
 --------------------
-    2) Организация :
-- Обединява служителите в една институция
-- Назначава всички свои потребители след първия
+     2) Organization:
+- Unites employees in one institution
+- Assigns all its users after the first one
 
 --------------------
-    3) Потребител на организация (служител в институция):
-- Има достъп само до необходимата за конкретната институция информация
-- Допринася към държавната база данни със записите, за които носи отговорност
+     3) User of an organization (employee in an institution):
+- Has access only to the information necessary for the specific institution
+- Contributes to the state database with the records for which it is responsible
 
-Институции, с които програмата работи:   
+Institutions the program works with:
 --------------------
 
-	1) Държавна (МВР - полиция):
-- Издава престъпления
-- Иззема притежания
-- Регистрира прекосяване на граница
-- Допитва се до частни институции
+1) State-owned (Ministry of the Interior - Police):
+- Issues crimes
+- Seizes possessions
+- Registers border crossing
+- Inquires private institutions
 
-    Има достъп до:
-- Име
-- ЕГН
-- Престъпления
-- Притежания
-- Прекосяване на граница
-- Роднини
+     Has access to:
+- Name
+- SSN (id)
+- Crimes
+- Possessions
+- Entry/exit border registrations
+- Relatives
 
 --------------------
-    2) Частна (Кредитна институция - банка):
-- Издава кредити
-- Иззема притежания
-- Променя баланса по сметката
-- Допитва се до държавни институции
+     2) Private (Credit institution - A bank):
+- Issues credits
+- Seizes possessions
+- Changes the account balance
+- Inquires state-owned institutions
 
-    Има достъп до:
-- Име
-- ЕГН
-- Фирми
-- Кредитно досие на роднини
-- Кредитно досие
+     Has access to:
+- Name
+- SSN (id)
+- Companies owned
+- Credit files of relatives
+- Credit files
 
-    Всяка банка разполага със собствена база данни, която съдържа:   
-- Баланс по сметката
-- Текущ дълг
-- Адрес
-- Телефон
-- Имейл
+     Each bank has its own database, which contains:
+- Account balance
+- Current debt
+- Address
+- Phone number
+- Email
