@@ -24,12 +24,10 @@ The system has 3 account types:
 - Has access to all the information about every citizen at any time
 - Creates organizations and assigns their first user
 
---------------------
      2) Organization:
 - Unites employees in one institution
 - Assigns all its users after the first one
 
---------------------
      3) User of an organization (employee in an institution):
 - Has access only to the information necessary for the specific institution
 - Contributes to the state database with the records for which it is responsible
@@ -37,7 +35,7 @@ The system has 3 account types:
 Institutions the program works with:
 --------------------
 
-1) State-owned (Ministry of the Interior - Police):
+     1) State-owned (Ministry of the Interior - Police):
 - Issues crimes
 - Seizes possessions
 - Registers border crossing
@@ -51,7 +49,6 @@ Institutions the program works with:
 - Entry/exit border registrations
 - Relatives
 
---------------------
      2) Private (Credit institution - A bank):
 - Issues credits
 - Seizes possessions
